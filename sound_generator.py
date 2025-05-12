@@ -20,6 +20,8 @@ Date: [2025-04-18]
 import numpy as np
 import sounddevice as sd
 import math
+import thorns
+
 
 
 class CreateSound:
@@ -121,6 +123,8 @@ class CreateSound:
         Returns:
             np.ndarray: Normalized audio signal.
         """
+        ### do the normalizing as the mean of the square , normalixe by power. this should be smaller than 1, if it stoo quiet you would neet to be multiply by 1.
+
         max_val = np.max(np.abs(sound))
         if max_val > 1:
             sound /= max_val  # Normalize to the range [-1, 1]
