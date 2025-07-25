@@ -15,9 +15,6 @@ function synapse_results_fiber = run_fiber_synapse_batch_parfor(vihc,cf, cf_idx,
     fiber_idx_all  = zeros(1, nfibers);
     anf_type_all   = cell(1, nfibers);
     psth_all       = cell(1, nfibers);
-    disp(class(cf));
-    disp(cf);
-
 
     % === Parallel loop over fibers ===
     parfor idx_fiber = 1:nfibers
