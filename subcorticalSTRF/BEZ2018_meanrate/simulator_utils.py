@@ -1,3 +1,5 @@
+# simulator_utils.py
+
 import numpy as np
 from subcorticalSTRF.stim_generator import soundgen
 import matlab
@@ -309,14 +311,12 @@ def run_ihc(eng, signal, cf, fs, cohc = 1., cihc = 1., species = 'human'):
     #     if signal.ndim > 1:
     #         signal = signal.flatten()  # Flatten to 1D
     #     signal = matlab.double(signal.tolist())
-    print(type(signal))
-    print(len(signal))
-    reptime = float(len(signal)/fs)
-    print(reptime)
-    print(len(signal))
-    vihc = eng.model_IHC_BEZ2018a(signal,cf, 1., 1.0/fs,reptime, cohc, cihc, species_map)
-    print(f"[DEBUG] vihc output length: {len(vihc)}")
 
+    #print(type(signal))
+    #print(len(signal))
+    reptime = float(len(signal)/fs)
+
+    vihc = eng.model_IHC_BEZ2018a(signal,cf, 1., 1.0/fs,reptime, cohc, cihc, species_map)
 
     return vihc
 
