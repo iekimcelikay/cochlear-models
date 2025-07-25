@@ -1,5 +1,5 @@
 # This will be the functional script adapted from sound_generator.py
-import cochlea
+
 import numpy as np
 import math
 import thorns
@@ -146,72 +146,6 @@ class SoundGen:
 
         return sequence
 
-    def peripheral_simulator(self, sequence, peripheral_fs, num_cf):
-        """
-        :param sequence: array_like: Sound sequence as np array
-        :param peripheral_fs: floatL Sampling frequency of the peripheral signal (diff. from original fs).
-        anf_num: tuple: The desired number of auditory nerve fibers per frequency channel (CF), (HSR#, MSR#, LSR#).
-        cf: tuple: (min_cf, max_cf, num_cf).
-        :param num_cf: number of frequency channels.
-        species: {'cat', 'human', 'human_glasberg1990'}
-        seed: int: Random seed for the spike generator.
-        :return: anf_trains: Auditory nerve spike trains.
-        """
-        if self.sample_rate != peripheral_fs:
-            sequence = wv.resample(sequence, self.sample_rate, peripheral_fs)
-        anf_trains = cochlea.run_zilany2014(sequence, peripheral_fs,
-                                            anf_num = (60, 25, 15),
-                                            cf = (125, 2500, num_cf),
-                                            species= 'human', seed = 557)
-
-        return anf_trains
-    def peripheral_sim_rate(self, sequence, peripheral_fs, num_cf, subcortical_fs):
-        if self.sample_rate!= peripheral_fs:
-            sequence = wv.resample(sequence, self.sample_rate, peripheral_fs)
-
-        np.random.seed()
-        auditory_nerve_rate_ts = cochlea.run_zilany2014_rate(sequence, peripheral_fs,
-                                                             anf_types= ('lsr', 'msr', 'hsr'),
-                                                             cf = (125, 2500, num_cf),
-                                                             species= 'human',
-                                                             cohc = 1,
-                                                             cihc = 1,
-                                                             powerlaw = 'actual',
-                                                             ffGn = True)
-        #auditory_nerve_rate_ts = .6 * auditory_nerve_rate_ts['hsr'] + .25 * auditory_nerve_rate_ts['msr'] + .15 * auditory_nerve_rate_ts['lsr']
-        #resampleN = len(sequence) * subcortical_fs / peripheral_fs
-        #p = wv.resample(auditory_nerve_rate_ts, peripheral_fs, subcortical_fs)  # signal = scipy.signal
-        #p[p < 0] = 0
-        #p[p > 1] = 1
-
-        return auditory_nerve_rate_ts
-
-    def cochlea_rate_manual(self, sequence, peripheral_fs, num_cf, num_anf, seed= None):
-        """
-        num_ANF must be tuple.
-        :param sequence:
-        :param peripheral_fs:
-        :param num_cf:
-        :param num_anf:
-        :return:
-        """
-        if seed is None:
-            seed = int(time.time() * 1e6) % (2**32 - 1)
-
-        print(seed)
-
-
-        if self.sample_rate!= peripheral_fs:
-            sequence = wv.resample(sequence, self.sample_rate, peripheral_fs)
-        anf_trains = cochlea.run_zilany2014(sequence, peripheral_fs,
-                                                anf_num=num_anf,
-                                                cf=(125, 2500, num_cf),
-                                                species='human', seed=seed, cohc=1, cihc=1, powerlaw='actual', ffGn=True)
-        # Accumulate the spike trainsreturn anf_trains
-        #anf_acc = thorns.accumulate(anf_trains, keep=['cf', 'type'])
-        anf_acc = anf_trains
-
-        return anf_acc
 
 
 
