@@ -1,2 +1,7 @@
 *.mat
 *.png
+/soch.py
+.sublime_workspace
+.sublime-project
+.wav
+
