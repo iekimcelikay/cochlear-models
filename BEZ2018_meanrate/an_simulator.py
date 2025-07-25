@@ -29,11 +29,12 @@ class AuditoryNerveSimulator:
 
     def run_synapse(self, vihc, cf, cf_idx, freq, db, tone_idx):
         tdres = 1.0 / self.fs
-        cohc, cihc = 1.0 , 1.0
-        species_code = 2.0
+        noiseType = 1.0 # 1.0 for variable fGN, and 0 for fixed fGN
+        implnt = 1.0 # 1.0 for actual implementation, 0 for approximate
+        expliketype = 1.0 # 1.0 for shifted softplus (preferred)
         num_lsr, num_msr, num_hsr = self.num_ANF
 
-        return self.eng.run_fiber_synapse_batch_parfor(vihc, cf, cf_idx, freq, db, tone_idx, 1.0, tdres, cohc, cihc, species_code, self.fibers_filename, nargout=1)
+        return self.eng.run_fiber_synapse_batch_parfor(vihc, cf, cf_idx, freq, db, tone_idx, 1.0, tdres, noiseType, implnt, expliketype, self.fibers_filename, nargout=1)
 
     def run_channel(self, chan, tone_idx):
         vihc = self.run_ihc(chan)
