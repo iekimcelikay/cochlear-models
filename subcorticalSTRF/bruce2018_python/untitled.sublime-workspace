@@ -1,0 +1,464 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "ihc_synapse_together.py",
+			"settings":
+			{
+				"buffer_size": 4962,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					6,
+					1,
+					"toggle_comment",
+					{
+						"block": false
+					},
+					"AwAAAK0RAAAAAAAArxEAAAAAAAAAAAAAeBEAAAAAAAB6EQAAAAAAAAAAAABWEQAAAAAAAFgRAAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD1EQAAAAAAAFURAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					21,
+					1,
+					"left_delete",
+					null,
+					"AQAAAE4FAAAAAAAATgUAAAAAAAABAAAAMw",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABPBQAAAAAAAE8FAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					22,
+					1,
+					"insert",
+					{
+						"characters": "1"
+					},
+					"AQAAAE4FAAAAAAAATwUAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABOBQAAAAAAAE4FAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					25,
+					1,
+					"left_delete",
+					null,
+					"AQAAAE4FAAAAAAAATgUAAAAAAAABAAAAMQ",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABPBQAAAAAAAE8FAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					26,
+					1,
+					"insert",
+					{
+						"characters": "4"
+					},
+					"AQAAAE4FAAAAAAAATwUAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABOBQAAAAAAAE4FAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					28,
+					1,
+					"left_delete",
+					null,
+					"AQAAAFAFAAAAAAAAUAUAAAAAAAABAAAANQ",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABRBQAAAAAAAFEFAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					29,
+					1,
+					"insert",
+					{
+						"characters": "4"
+					},
+					"AQAAAFAFAAAAAAAAUQUAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABQBQAAAAAAAFAFAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					31,
+					2,
+					"left_delete",
+					null,
+					"AgAAAFMFAAAAAAAAUwUAAAAAAAABAAAAMlIFAAAAAAAAUgUAAAAAAAABAAAAMQ",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABUBQAAAAAAAFQFAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					32,
+					1,
+					"insert",
+					{
+						"characters": "4"
+					},
+					"AQAAAFIFAAAAAAAAUwUAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABSBQAAAAAAAFIFAAAAAAAAAAAAAAAA8L8"
+				]
+			]
+		},
+		{
+			"file": "/home/ekim/PycharmProjects/subcorticalSTRF/subcorticalSTRF/rf_simulator/helperfunctions/simulator_utils.py",
+			"settings":
+			{
+				"buffer_size": 6249,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					4,
+					1,
+					"insert",
+					{
+						"characters": "str("
+					},
+					"BAAAAJ0PAAAAAAAAng8AAAAAAAAAAAAAng8AAAAAAACfDwAAAAAAAAAAAACfDwAAAAAAAKAPAAAAAAAAAAAAAKAPAAAAAAAAoQ8AAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAACdDwAAAAAAAJ0PAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					8,
+					1,
+					"insert",
+					{
+						"characters": ")"
+					},
+					"AQAAAKUPAAAAAAAApg8AAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAClDwAAAAAAAKUPAAAAAAAAAAAAAAAA8L8"
+				]
+			]
+		},
+		{
+			"file": "run_synapse.py",
+			"settings":
+			{
+				"buffer_size": 4674,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/ekim/PycharmProjects/subcorticalSTRF/subcorticalSTRF/rf_simulator/modelfunctions/untitled.sublime-project",
+		"/home/ekim/PycharmProjects/subcorticalSTRF/subcorticalSTRF/rf_simulator/modelfunctions/ihc_synapse_together.py",
+		"/home/ekim/audio_periph_models/cochlea/cochlea/zilany2014/zilany2014_rate.py",
+		"/home/ekim/audio_periph_models/BEZ2018a_model/model_Synapse_BEZ2018a.c",
+		"/home/ekim/audio_periph_models/BEZ2018a_model/model_Synapse_BEZ2018a.m",
+		"/home/ekim/audio_periph_models/BEZ2018a_model/testPopRateLevel_BEZ2018a_commented.m",
+		"/home/ekim/audio_periph_models/BEZ2018a_model/testANmodel_BEZ2018a.m",
+		"/home/ekim/audio_periph_models/BEZ2018a_model/model_IHC_BEZ2018a.m",
+		"/home/ekim/run_bruce2018_debuglog_170625.txt",
+		"/home/ekim/audio_periph_models/BEZ2018a_model/generateANpopulation.m",
+		"/home/ekim/audio_periph_models/cochlea/cochlea/zilany2014/util.py",
+		"/home/ekim/audio_periph_models/BEZ2018a_model/example_neurogram_code.m",
+		"/home/ekim/audio_periph_models/BEZ2018a_model/find_CF_Threshold_BEZ2018a.m",
+		"/home/ekim/audio_periph_models/BEZ2018a_model/generate_neurogram_BEZ2018a.m",
+		"/home/ekim/MATLAB/R2024b/toolbox/signal/signal/resample.m",
+		"/home/ekim/audio_periph_models/cochlea/cochlea/zilany2014/model_Synapse.c",
+		"/home/ekim/audio_periph_models/cochlea/cochlea/zilany2014/__init__.py",
+		"/home/ekim/PycharmProjects/aoede/aoede/bruce2018/__init__.py",
+		"/home/ekim/audio_periph_models/BEZ2018a_model/testFanoFactor_BEZ2018a.m",
+		"/home/ekim/PycharmProjects/subcorticalSTRF/cochlea3/cochlea3/zilany2014/__init__.py",
+		"/home/ekim/ihc_df.csv",
+		"/home/ekim/PycharmProjects/aoede/aoede/bruce2018/util.py",
+		"/home/ekim/audio_periph_models/cochlea/cochlea/zilany2014/_zilany2014.pyx",
+		"/home/ekim/audio_periph_models/BEZ2018a_model/ffGn_2018a.m",
+		"/home/ekim/audio_periph_models/Zilany-2014-Code-and-paper/model_Synapse.c",
+		"/home/ekim/audio_periph_models/cochlea/cochlea/zilany2014/model_IHC.c",
+		"/home/ekim/PycharmProjects/aoede/aoede/__init__.py",
+		"/home/ekim/PycharmProjects/aoede/__init__.py",
+		"/home/ekim/audio_periph_models/Zilany-2014-Code-and-paper/ffGn.m",
+		"/home/ekim/audio_periph_models/Zilany-2014-Code-and-paper/ANmodel.m",
+		"/home/ekim/PycharmProjects/subcorticalSTRF/cochlea/cochlea/zilany2014/_zilany2014.pyx",
+		"/home/ekim/audio_periph_models/cochlea/cochlea/zilany2014/complex.c",
+		"/home/ekim/audio_periph_models/cochlea/cochlea/zilany2014/complex.h",
+		"/home/ekim/audio_periph_models/cochlea/cochlea/zilany2014/complex.hpp",
+		"/home/ekim/audio_periph_models/cochlea/scripts/run_zilany2014",
+		"/home/ekim/Downloads/BEZ2018a_model/model_Synapse_BEZ2018a.m",
+		"/home/ekim/audio_periph_models/BEZ2018a_model/model_IHC_BEZ2018a.c",
+		"/home/ekim/audio_periph_models/BEZ2018a_model/complex.hpp",
+		"/home/ekim/audio_periph_models/BEZ2018a_model/complex.h",
+		"/home/ekim/audio_periph_models/BEZ2018a_model/complex.c",
+		"/home/ekim/audio_periph_models/cochlea/cochlea/zilany2014/model_IHC.h",
+		"/home/ekim/audio_periph_models/cochlea/setup.py",
+		"/home/ekim/audio_periph_models/cochlea/cochlea/__init__.py",
+		"/home/ekim/audio_periph_models/cochlea/cochlea/zilany2014/model_Synapse.h",
+		"/home/ekim/Downloads/Zilany-2014-Code-and-paper/ANmodel.m",
+		"/home/ekim/PycharmProjects/subcorticalSTRF/cochlea/cochlea/zilany2014/model_Synapse.c",
+		"/home/ekim/PycharmProjects/subcorticalSTRF/cochlea/cochlea/zilany2014/__init__.py",
+		"/home/ekim/Downloads/Zilany-2014-Code-and-paper/model_Synapse.c"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"resamp",
+			"powerLawIn",
+			"powerLaqIN ",
+			"IhcOutputArray",
+			"powerLawIn",
+			"down",
+			"synout",
+			"ihcDims",
+			"ffgn",
+			"TmpSyn",
+			"synout",
+			"meanrate"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "ihc_synapse_together.py",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4962,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1177.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/ekim/PycharmProjects/subcorticalSTRF/subcorticalSTRF/rf_simulator/helperfunctions/simulator_utils.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6249,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4006,
+								4006
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2501.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "run_synapse.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4674,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1116.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 48.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 328.0,
+		"history":
+		[
+		]
+	},
+	"output.find_results":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"pinned_build_system": "",
+	"project": "untitled.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 228.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
