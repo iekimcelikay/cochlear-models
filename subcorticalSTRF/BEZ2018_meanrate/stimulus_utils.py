@@ -1,7 +1,7 @@
 # stimulus_utils.py
 import numpy as np
-#from .simulator_utils import *
-from subcorticalSTRF.bruce2018_python.simulator_utils import calc_cfs
+
+from simulator_utils import calc_cfs
 
 def generate_stimuli_params(freq_range, num_cf, db_range):
     desired_dbs = np.arange(*db_range)

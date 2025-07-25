@@ -1,7 +1,7 @@
 # simulator_utils.py
 
 import numpy as np
-from subcorticalSTRF.stim_generator import soundgen
+
 import matlab
 from numpy.random import rand, randn, seed
 import pprint
