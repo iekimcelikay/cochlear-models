@@ -1,0 +1,801 @@
+onnected to pydev debugger (build 243.26053.29)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 0
+CF index       (cf_idx): 0
+dB level             : 90
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 0
+CF index       (cf_idx): 1
+dB level             : 90
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 0
+CF index       (cf_idx): 2
+dB level             : 90
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 0
+CF index       (cf_idx): 3
+dB level             : 90
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 0
+CF index       (cf_idx): 4
+dB level             : 90
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 1
+CF index       (cf_idx): 0
+dB level             : 90
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 1
+CF index       (cf_idx): 1
+dB level             : 90
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 1
+CF index       (cf_idx): 2
+dB level             : 90
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 1
+CF index       (cf_idx): 3
+dB level             : 90
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 1
+CF index       (cf_idx): 4
+dB level             : 90
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 2
+CF index       (cf_idx): 0
+dB level             : 90
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 2
+CF index       (cf_idx): 1
+dB level             : 90
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 2
+CF index       (cf_idx): 2
+dB level             : 90
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 2
+CF index       (cf_idx): 3
+dB level             : 90
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 2
+CF index       (cf_idx): 4
+dB level             : 90
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 3
+CF index       (cf_idx): 0
+dB level             : 90
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 3
+CF index       (cf_idx): 1
+dB level             : 90
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 3
+CF index       (cf_idx): 2
+dB level             : 90
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 3
+CF index       (cf_idx): 3
+dB level             : 90
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 3
+CF index       (cf_idx): 4
+dB level             : 90
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 4
+CF index       (cf_idx): 0
+dB level             : 90
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 4
+CF index       (cf_idx): 1
+dB level             : 90
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 4
+CF index       (cf_idx): 2
+dB level             : 90
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 4
+CF index       (cf_idx): 3
+dB level             : 90
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 4
+CF index       (cf_idx): 4
+dB level             : 90
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 5
+CF index       (cf_idx): 0
+dB level             : 95
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 5
+CF index       (cf_idx): 1
+dB level             : 95
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 5
+CF index       (cf_idx): 2
+dB level             : 95
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 5
+CF index       (cf_idx): 3
+dB level             : 95
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 5
+CF index       (cf_idx): 4
+dB level             : 95
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 6
+CF index       (cf_idx): 0
+dB level             : 95
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 6
+CF index       (cf_idx): 1
+dB level             : 95
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 6
+CF index       (cf_idx): 2
+dB level             : 95
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 6
+CF index       (cf_idx): 3
+dB level             : 95
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 6
+CF index       (cf_idx): 4
+dB level             : 95
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 7
+CF index       (cf_idx): 0
+dB level             : 95
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 7
+CF index       (cf_idx): 1
+dB level             : 95
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 7
+CF index       (cf_idx): 2
+dB level             : 95
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 7
+CF index       (cf_idx): 3
+dB level             : 95
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 7
+CF index       (cf_idx): 4
+dB level             : 95
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 8
+CF index       (cf_idx): 0
+dB level             : 95
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 8
+CF index       (cf_idx): 1
+dB level             : 95
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 8
+CF index       (cf_idx): 2
+dB level             : 95
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 8
+CF index       (cf_idx): 3
+dB level             : 95
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 8
+CF index       (cf_idx): 4
+dB level             : 95
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 9
+CF index       (cf_idx): 0
+dB level             : 95
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 9
+CF index       (cf_idx): 1
+dB level             : 95
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 9
+CF index       (cf_idx): 2
+dB level             : 95
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 9
+CF index       (cf_idx): 3
+dB level             : 95
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 9
+CF index       (cf_idx): 4
+dB level             : 95
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 10
+CF index       (cf_idx): 0
+dB level             : 100
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 10
+CF index       (cf_idx): 1
+dB level             : 100
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 10
+CF index       (cf_idx): 2
+dB level             : 100
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 10
+CF index       (cf_idx): 3
+dB level             : 100
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 10
+CF index       (cf_idx): 4
+dB level             : 100
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 11
+CF index       (cf_idx): 0
+dB level             : 100
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 11
+CF index       (cf_idx): 1
+dB level             : 100
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 11
+CF index       (cf_idx): 2
+dB level             : 100
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 11
+CF index       (cf_idx): 3
+dB level             : 100
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 11
+CF index       (cf_idx): 4
+dB level             : 100
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 12
+CF index       (cf_idx): 0
+dB level             : 100
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 12
+CF index       (cf_idx): 1
+dB level             : 100
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 12
+CF index       (cf_idx): 2
+dB level             : 100
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 12
+CF index       (cf_idx): 3
+dB level             : 100
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 12
+CF index       (cf_idx): 4
+dB level             : 100
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 13
+CF index       (cf_idx): 0
+dB level             : 100
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 13
+CF index       (cf_idx): 1
+dB level             : 100
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 13
+CF index       (cf_idx): 2
+dB level             : 100
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 13
+CF index       (cf_idx): 3
+dB level             : 100
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 13
+CF index       (cf_idx): 4
+dB level             : 100
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 14
+CF index       (cf_idx): 0
+dB level             : 100
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 14
+CF index       (cf_idx): 1
+dB level             : 100
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 14
+CF index       (cf_idx): 2
+dB level             : 100
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 14
+CF index       (cf_idx): 3
+dB level             : 100
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 14
+CF index       (cf_idx): 4
+dB level             : 100
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 15
+CF index       (cf_idx): 0
+dB level             : 105
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 15
+CF index       (cf_idx): 1
+dB level             : 105
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 15
+CF index       (cf_idx): 2
+dB level             : 105
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 15
+CF index       (cf_idx): 3
+dB level             : 105
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 15
+CF index       (cf_idx): 4
+dB level             : 105
+Tone frequency (Hz)  : 125.0
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 16
+CF index       (cf_idx): 0
+dB level             : 105
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 16
+CF index       (cf_idx): 1
+dB level             : 105
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 16
+CF index       (cf_idx): 2
+dB level             : 105
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 16
+CF index       (cf_idx): 3
+dB level             : 105
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 16
+CF index       (cf_idx): 4
+dB level             : 105
+Tone frequency (Hz)  : 332.8766040150745
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 17
+CF index       (cf_idx): 0
+dB level             : 105
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 17
+CF index       (cf_idx): 1
+dB level             : 105
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 17
+CF index       (cf_idx): 2
+dB level             : 105
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 17
+CF index       (cf_idx): 3
+dB level             : 105
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 17
+CF index       (cf_idx): 4
+dB level             : 105
+Tone frequency (Hz)  : 700.4736406894532
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 18
+CF index       (cf_idx): 0
+dB level             : 105
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 18
+CF index       (cf_idx): 1
+dB level             : 105
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 18
+CF index       (cf_idx): 2
+dB level             : 105
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 18
+CF index       (cf_idx): 3
+dB level             : 105
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 18
+CF index       (cf_idx): 4
+dB level             : 105
+Tone frequency (Hz)  : 1350.5111088885467
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 19
+CF index       (cf_idx): 0
+dB level             : 105
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 125.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 19
+CF index       (cf_idx): 1
+dB level             : 105
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 332.8766040150745
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 19
+CF index       (cf_idx): 2
+dB level             : 105
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 700.4736406894532
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 19
+CF index       (cf_idx): 3
+dB level             : 105
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 1350.5111088885467
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
+---- CHANNEL ARG ----
+Tone index     (i_tone): 19
+CF index       (cf_idx): 4
+dB level             : 105
+Tone frequency (Hz)  : 2500.0
+Characteristic Freq  : 2500.0
+Sampling Rate        : 100000.0
+Signal shape         : (20000,)
