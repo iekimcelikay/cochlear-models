@@ -4,10 +4,12 @@ import time
 from datetime import datetime
 
 class FolderManager:
-    def __init__(self, base_dir, num_repeats, num_cf, num_ANF, stimulus_params):
+    def __init__(self, base_dir, num_repeats, num_cf, min_cf, max_cf, num_ANF, stimulus_params):
         self.base_dir = base_dir
         self.num_repeats = num_repeats
         self.num_cfs = num_cf
+        self.min_cf = min_cf
+        self.max_cf = max_cf
         self.num_ANF = num_ANF # the order in my module is (lsr, msr,hsr). this is different in cochlea, for example.
         self.stimulus_params = stimulus_params
         self.results_folder = None
@@ -17,7 +19,7 @@ class FolderManager:
     def create_batch_folder(self):
         lsr, msr, hsr = self.num_ANF
         self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        folder_name = f"psth_batch_{self.num_repeats}runs_{self.num_cfs}cfs_{lsr}-{msr}-{hsr}fibers_{self.timestamp}"
+        folder_name = f"psth_batch_{self.num_repeats}runs_{self.num_cfs}cfs_min{self.min_cf}hz_max{self.max_cf}hz_{lsr}-{msr}-{hsr}fibers_{self.timestamp}"
         self.results_folder = os.path.join(self.base_dir, folder_name)
         os.makedirs(self.results_folder, exist_ok=True)
         print(f"[INFO] Output directory: {self.results_folder}")

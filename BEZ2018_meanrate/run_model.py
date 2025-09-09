@@ -9,6 +9,7 @@ import time
 import gc
 from datetime import datetime
 import matlab
+import numpy as np
 
 from folder_manager import FolderManager
 from an_simulator import AuditoryNerveSimulator
@@ -98,16 +99,22 @@ num_harmonics = 1
 tone_duration = 0.200
 harmonic_factor = 0.5
 db_range = (50, 90, 10)
-total_number_of_tone_freq = 5
-tone_freq_range = (125, 2500, total_number_of_tone_freq)
+total_number_of_tone_freq = 20
+min_f0 = 125
+max_f0 = 2500
+tone_freq_range = (min_f0, max_f0, total_number_of_tone_freq)
 psth_bin_width = 0.0005
 
 peripheral_fs = 100e3
-num_cf = 3
-freq_range = (125, 2500, num_cf)
-num_ANF = (2,2,2)
+num_cf = 10
+min_cf = 125
+max_cf = 2500
+freq_range = (min_cf, max_cf, num_cf)
+num_ANF = (128,128,128)
+
 num_lsr, num_msr, num_hsr = num_ANF
-cfs = calc_cfs(freq_range, species='human')
+#cfs = calc_cfs(freq_range, species='human')
+cfs = calc_cfs([125.0], 'human')
 
 model_folder = "/home/ekim/PycharmProjects/subcorticalSTRF/subcorticalSTRF/BEZ2018_meanrate"
 fibers_filename = os.path.join(model_folder, f"ANpopulation_{num_lsr}-{num_msr}-{num_hsr}.mat")
@@ -144,7 +151,7 @@ stimulus_parameters = {
 
 # ==== MAIN ====
 if __name__ == "__main__":
-	num_repeats = 4
+	num_repeats = 10
 	print("[INFO] Starting full batch simulation...")
 	start_time = time.time()
 
@@ -152,6 +159,8 @@ if __name__ == "__main__":
 		base_dir=results_folder,
 		num_repeats=num_repeats,
 		num_cf=num_cf,
+        min_cf=min_cf,
+        max_cf=max_cf,
 		num_ANF=num_ANF,
 		stimulus_params=stimulus_parameters
 	)
@@ -174,5 +183,6 @@ if __name__ == "__main__":
 	end_time = time.time()
 	elapsed = end_time - start_time
 	print(f"[INFO] Total elapsed time for all {num_repeats} runs: {elapsed:.2f} seconds")
+	print(f"[INFO] Number of synapses each: {num_lsr}")
 	print("[INFO] Memory usage AFTER running model:")
 	print_mem_usage()
