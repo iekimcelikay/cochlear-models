@@ -44,7 +44,6 @@ class SoundGen:
             amplitude = (harmonic_factor ** (k - 1)) / num_harmonics
             sound = sound + amplitude * harmonic
 
-        sound = np.clip(sound, -1.0, 1.0)
         # Normalize the sound
         normalized_sound = thorns.waves.set_dbspl(sound, dbspl)
         return normalized_sound
@@ -105,6 +104,8 @@ class SoundGen:
         sound = sound.copy()
         L = int (self.tau * self.sample_rate)
         hw = np.hamming(2*L)
+
+        sound = sound.copy()
         sound[:L] *= hw[:L]
         sound[-L:] *= hw[L:]
         return sound
@@ -145,6 +146,88 @@ class SoundGen:
             sequence = sequence[:total_samples]
 
         return sequence
+    
+    def sample_frequencies_gaussian(self, freq_mean, freq_std, num_samples, freq_min=None, freq_max=None, seed=None):
+
+        if seed is not None:
+            np.random.seed(seed)
+
+        # Sample from Gaussian distribution
+        frequencies = np.random.normal(freq_mean, freq_std, num_samples)
+
+        # Apply min/max constraints if provided
+        if freq_min is not None and freq_max is not None:
+            frequencies = np.clip(frequencies, freq_min, freq_max)
+        elif freq_min is not None:
+            frequencies = np.maximum(frequencies, freq_min)
+        elif freq_max is not None:
+            frequencies = np.minimum(frequencies, freq_max)
+        
+        # Ensure no negative frequencies (physically meaningless)
+        frequencies = np.abs(frequencies)
+
+        return frequencies
+    
+    def calculate_num_tones(self, tone_duration, isi, total_duration):
+        total_samples = int(total_duration * self.sample_rate)
+        isi_samples = int(isi * self.sample_rate)
+        tone_samples = int(tone_duration * self.sample_rate)
+        num_tones = int((total_samples + isi_samples) // (tone_samples + isi_samples))
+        return num_tones
+    
+    def generate_sequence_from_freq_array(self, frequencies, num_harmonics, 
+                                          tone_duration, harmonic_factor,
+                                          dbspl, isi, total_duration=None):
+        isi_samples = int(isi * self.sample_rate)
+        sequence = np.array([])
+
+         # Generate each tone at its specified frequency 
+        for freq in frequencies:
+            # Generate tone at this frequency
+            sound = self.sound_maker(freq, num_harmonics, tone_duration,
+                                        harmonic_factor, dbspl)
+            
+             # Apply ramping (I will try hamming this time too)
+            ramped_sound = self.ramp_in_out(sound)
+
+             # Add tone to sequence
+            sequence = np.concatenate((sequence, ramped_sound))
+
+             # Add ISI (silence) after tone 
+            sequence = np.concatenate((sequence, np.zeros(isi_samples)))
+
+        # Trim to exact total duration if specified
+        if total_duration is not None:
+                total_samples = int(total_duration * self.sample_rate)
+                if len(sequence) > total_samples:
+                    sequence = sequence[:total_samples] 
+        return sequence
+
+def generate_sequence_gaussian_freq(self, freq_mean, freq_std, num_harmonics, 
+                                   tone_duration, harmonic_factor, dbspl, 
+                                   total_duration, isi, 
+                                   freq_min=None, freq_max=None, seed=None):
+    """
+    Convenience method: Generate sequence with Gaussian-distributed frequencies.
+    
+    This combines the modular methods above into one call.
+    """
+    # Step 1: Calculate how many tones we need
+    num_tones = self.calculate_num_tones(tone_duration, isi, total_duration)
+    
+    # Step 2: Sample frequencies
+    frequencies = self.sample_frequencies_gaussian(
+        freq_mean, freq_std, num_tones, freq_min, freq_max, seed
+    )
+    
+    # Step 3: Generate sequence from frequency array
+    sequence = self.generate_sequence_from_freq_array(
+        frequencies, num_harmonics, tone_duration, harmonic_factor, 
+        dbspl, isi, total_duration
+    )
+    
+    return sequence, frequencies
+            
 
     def peripheral_simulator(self, sequence, peripheral_fs, num_cf):
         """
@@ -186,11 +269,13 @@ class SoundGen:
 
         return auditory_nerve_rate_ts
 
-    def cochlea_rate_manual(self, sequence, peripheral_fs, num_cf, num_anf, seed= None):
+    def cochlea_rate_manual(self, sequence, peripheral_fs, min_cf, max_cf,num_cf,  num_anf, seed= None):
         """
         num_ANF must be tuple.
         :param sequence:
         :param peripheral_fs:
+        :param min_cf:
+        :param max_cf:
         :param num_cf:
         :param num_anf:
         :return:
@@ -205,7 +290,7 @@ class SoundGen:
             sequence = wv.resample(sequence, self.sample_rate, peripheral_fs)
         anf_trains = cochlea.run_zilany2014(sequence, peripheral_fs,
                                                 anf_num=num_anf,
-                                                cf=(125, 2500, num_cf),
+                                                cf=(min_cf, max_cf, num_cf),
                                                 species='human', seed=seed, cohc=1, cihc=1, powerlaw='actual', ffGn=True)
         # Accumulate the spike trainsreturn anf_trains
         #anf_acc = thorns.accumulate(anf_trains, keep=['cf', 'type'])
