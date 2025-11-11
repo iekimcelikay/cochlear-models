@@ -121,7 +121,7 @@ class SoundGen:
 
         return sound
 
-    def generate_sequence(self, freq, num_harmonics, tone_duration, harmonic_factor, dbspl, total_duration, isi):
+    def generate_sequence(self, freq, num_harmonics, tone_duration, harmonic_factor, dbspl, total_duration, isi, stereo=True):
 
         # Generate the tone using the sound_maker method
         sound = self.sound_maker(freq,num_harmonics, tone_duration, harmonic_factor, dbspl)
@@ -144,6 +144,10 @@ class SoundGen:
         # Ensure the sequence doesn't exceed the total duration
         if len(sequence) > total_samples:
             sequence = sequence[:total_samples]
+
+        # If stereo is desired, duplicate the mono sequence into two channels
+        if stereo:
+            sequence = np.column_stack((sequence, sequence))
 
         return sequence
     
@@ -177,7 +181,8 @@ class SoundGen:
     
     def generate_sequence_from_freq_array(self, frequencies, num_harmonics, 
                                           tone_duration, harmonic_factor,
-                                          dbspl, isi, total_duration=None):
+                                          dbspl, isi, total_duration=None, 
+                                          stereo=True):
         isi_samples = int(isi * self.sample_rate)
         sequence = np.array([])
 
@@ -201,12 +206,17 @@ class SoundGen:
                 total_samples = int(total_duration * self.sample_rate)
                 if len(sequence) > total_samples:
                     sequence = sequence[:total_samples] 
+
+        # If stereo is desired, duplicate the mono sequence into two channels
+        if stereo:
+            sequence = np.column_stack((sequence, sequence))
         return sequence
 
 def generate_sequence_gaussian_freq(self, freq_mean, freq_std, num_harmonics, 
                                    tone_duration, harmonic_factor, dbspl, 
                                    total_duration, isi, 
-                                   freq_min=None, freq_max=None, seed=None):
+                                   freq_min=None, freq_max=None, seed=None,
+                                   stereo=True):
     """
     Convenience method: Generate sequence with Gaussian-distributed frequencies.
     
@@ -223,7 +233,7 @@ def generate_sequence_gaussian_freq(self, freq_mean, freq_std, num_harmonics,
     # Step 3: Generate sequence from frequency array
     sequence = self.generate_sequence_from_freq_array(
         frequencies, num_harmonics, tone_duration, harmonic_factor, 
-        dbspl, isi, total_duration
+        dbspl, isi, total_duration, stereo=stereo
     )
     
     return sequence, frequencies
