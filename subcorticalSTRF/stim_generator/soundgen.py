@@ -1,5 +1,5 @@
 # This will be the functional script adapted from sound_generator.py
-import cochlea
+#import cochlea
 import numpy as np
 import math
 import thorns
@@ -7,8 +7,6 @@ import time
 from thorns import waves as wv
 import scipy.signal as signal
 from scipy.signal import firwin, filtfilt
-
-# Type annotations are unsupported in Python 2.  So will remove them.
 
 # This script will define the functions, and then another module script will call these functions.
 
@@ -24,7 +22,7 @@ class SoundGen:
         self.tau = tau
 
 
-    def sound_maker(self, freq, num_harmonics, tone_duration, harmonic_factor, dbspl):
+    def sound_maker(self, freq, num_harmonics, tone_duration, harmonic_factor):
         """
         :param freq: Base frequency in Hz.
         :param num_harmonics: Number of harmonic tones.
@@ -41,11 +39,17 @@ class SoundGen:
         for k in range(1, num_harmonics + 1):
             omega = 2 * np.pi * freq * k
             harmonic = np.sin(omega * t)
-            amplitude = (harmonic_factor ** (k - 1)) / num_harmonics
+            amplitude = harmonic_factor ** (k - 1)
             sound = sound + amplitude * harmonic
+        
+        # TODO: call thorns to normalize to a certain dbspl level 
+        normalized_sound = thorns.waves.set_dbspl(sound, 60)  # Example: set to 70 dB SPL
+        max_amplitude = 0.2753 # found this value in simulation, `maxamp_simulation.py`
+        normalized_sound = normalized_sound / (max_amplitude + 0.01)  
+        
+        # max_amplitude = 1.27 # TODO: calculate this number through the for loop simulation and it should be the same for every sound.
+        # sound = sound / (max_amplitude + 0.01)  # Scale down only if needed
 
-        # Normalize the sound
-        normalized_sound = thorns.waves.set_dbspl(sound, dbspl)
         return normalized_sound
 
     def noise_maker(self, tone_duration, seed=None):
@@ -121,10 +125,10 @@ class SoundGen:
 
         return sound
 
-    def generate_sequence(self, freq, num_harmonics, tone_duration, harmonic_factor, dbspl, total_duration, isi, stereo=True):
+    def generate_sequence(self, freq, num_harmonics, tone_duration, harmonic_factor,  total_duration, isi, stereo=True):
 
         # Generate the tone using the sound_maker method
-        sound = self.sound_maker(freq,num_harmonics, tone_duration, harmonic_factor, dbspl)
+        sound = self.sound_maker(freq,num_harmonics, tone_duration, harmonic_factor)
         # Sine ramp
         ramped_sound = self.sine_ramp(sound)
         # Calculate the number of tones that can fit into the total duration
@@ -181,7 +185,7 @@ class SoundGen:
     
     def generate_sequence_from_freq_array(self, frequencies, num_harmonics, 
                                           tone_duration, harmonic_factor,
-                                          dbspl, isi, total_duration=None, 
+                                          isi, total_duration=None, 
                                           stereo=True):
         isi_samples = int(isi * self.sample_rate)
         sequence = np.array([])
@@ -190,10 +194,10 @@ class SoundGen:
         for freq in frequencies:
             # Generate tone at this frequency
             sound = self.sound_maker(freq, num_harmonics, tone_duration,
-                                        harmonic_factor, dbspl)
+                                        harmonic_factor)
             
-             # Apply ramping (I will try hamming this time too)
-            ramped_sound = self.ramp_in_out(sound)
+             # Apply ramping (I will try hamming this time too) 
+            ramped_sound = self.sine_ramp(sound)
 
              # Add tone to sequence
             sequence = np.concatenate((sequence, ramped_sound))
@@ -212,33 +216,53 @@ class SoundGen:
             sequence = np.column_stack((sequence, sequence))
         return sequence
 
-def generate_sequence_gaussian_freq(self, freq_mean, freq_std, num_harmonics, 
-                                   tone_duration, harmonic_factor, dbspl, 
-                                   total_duration, isi, 
-                                   freq_min=None, freq_max=None, seed=None,
-                                   stereo=True):
-    """
-    Convenience method: Generate sequence with Gaussian-distributed frequencies.
-    
-    This combines the modular methods above into one call.
-    """
-    # Step 1: Calculate how many tones we need
-    num_tones = self.calculate_num_tones(tone_duration, isi, total_duration)
-    
-    # Step 2: Sample frequencies
-    frequencies = self.sample_frequencies_gaussian(
-        freq_mean, freq_std, num_tones, freq_min, freq_max, seed
-    )
-    
-    # Step 3: Generate sequence from frequency array
-    sequence = self.generate_sequence_from_freq_array(
-        frequencies, num_harmonics, tone_duration, harmonic_factor, 
-        dbspl, isi, total_duration, stereo=stereo
-    )
-    
-    return sequence, frequencies
-            
+    def generate_sequence_gaussian_freq(self, freq_mean, freq_std, num_harmonics, 
+                                       tone_duration, harmonic_factor, 
+                                       total_duration, isi, 
+                                       freq_min=None, freq_max=None, seed=None,
+                                       stereo=True):
+        
+        """
+        Convenience method: Generate sequence with Gaussian-distributed frequencies.
+        
+        This combines the modular methods above into one call.
+        :param freq_mean: Mean frequency for Gaussian sampling.
+        :param freq_std: Standard deviation for Gaussian sampling.
+        :param num_harmonics: Number of harmonics for each tone.
+        :param tone_duration: Duration of each tone in seconds.
+        :param harmonic_factor: Amplitude decay factor for harmonics.
+        :param total_duration: Total duration of the sequence in seconds.
+        :param isi: Inter-stimulus interval in seconds.
+        :param freq_min: Minimum frequency constraint (optional).
+        :param freq_max: Maximum frequency constraint (optional).
+        :param seed: Random seed for reproducibility (optional).
+        :param stereo: Whether to generate stereo output (default True).
 
+        :return: tuple: (sequence, frequencies)
+            - sequence: np.ndarray: Generated sound sequence.
+            - frequencies: np.ndarray: Array of sampled frequencies used in the sequence.
+            
+        """
+        # Step 1: Calculate how many tones we need
+        num_tones = self.calculate_num_tones(tone_duration, isi, total_duration)
+        
+        # Step 2: Sample frequencies
+        frequencies = self.sample_frequencies_gaussian(
+            freq_mean, freq_std, num_tones, freq_min, freq_max, seed
+        )
+        
+        # Step 3: Generate sequence from frequency array
+        sequence = self.generate_sequence_from_freq_array(
+            frequencies, num_harmonics, tone_duration, harmonic_factor, 
+             isi, total_duration, stereo=stereo
+        )
+        
+        return sequence, frequencies
+    
+    
+    
+    ## TODO: Move this simulators to a different script file later.
+###
     def peripheral_simulator(self, sequence, peripheral_fs, num_cf):
         """
         :param sequence: array_like: Sound sequence as np array
@@ -307,7 +331,5 @@ def generate_sequence_gaussian_freq(self, freq_mean, freq_std, num_harmonics,
         anf_acc = anf_trains
 
         return anf_acc
-
-
 
 ####
