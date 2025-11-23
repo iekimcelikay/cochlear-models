@@ -1,4 +1,6 @@
 # run_model.py
+# This script is not working.
+
 import pickle
 import os
 from datetime import datetime
@@ -93,7 +95,7 @@ def main():
         'num_ANF': list(num_ANF)
     }
     # --- Save results to path: (will soft-coded later, now hard_coded): ---
-    results_path = f"/home/ekim/PycharmProjects/subcorticalSTRF/subcorticalSTRF/bruce2018_results"
+    results_path = f"//subcorticalSTRF/bruce2018_results"
     os.makedirs(results_path, exist_ok=True)
 
     # --- To generate timestamped filename ---
