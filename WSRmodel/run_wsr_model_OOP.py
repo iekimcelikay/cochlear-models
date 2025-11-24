@@ -136,16 +136,6 @@ class WSRExperiment:
         return self.results
     
     def save_results(self):
-        """Save results in multiple formats."""
-        # Save as .mat file
-        mat_file = Path(self.save_dir) / "wsr_responses.mat"
-        sio.savemat(str(mat_file), self.results)
-        print(f"[INFO] Saved MATLAB format: {mat_file}")
-        
-        # Save as .npz file
-        npz_file = Path(self.save_dir) / "wsr_responses.npz"
-        np.savez(str(npz_file), **self.results)
-        print(f"[INFO] Saved NumPy format: {npz_file}")
 
         # Save as pickle file 
         wsr_results_path = Path(self.save_dir) / "wsr_results.pkl" 
