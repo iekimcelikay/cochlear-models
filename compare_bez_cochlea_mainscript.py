@@ -82,7 +82,269 @@ from scipy.io import loadmat
 from pathlib import Path
 from scipy.stats import linregress, pearsonr 
 import pandas as pd
+import logging
 
+logger = logging.getLogger(__name__)
+
+# ===============================================================================
+# CLASS-BASED API (for model_comparisons module)
+# ==============================================================================
+class MatlabDataLoader:
+    """
+    Unified loader for BEZ and Cochlea model data from MATLAB files.
+    
+    Provides methods for loading:
+    - BEZ run-averaged data (bez_acrossruns_psths.mat)
+    - BEZ individual runs data (psth_data_128fibers.mat)
+    - Cochlea data (cochlea_psths.mat)
+    """
+    
+    def __init__(self, bez_dir: Path = None, cochlea_dir: Path = None):
+        """
+        Initialize MATLAB data loader.
+        
+        Args:
+            bez_dir: Directory containing BEZ PSTH data files
+            cochlea_dir: Directory containing Cochlea PSTH data files
+        """
+        self.bez_dir = bez_dir or Path("subcorticalSTRF/BEZ2018_meanrate/results/processed_data")
+        self.cochlea_dir = cochlea_dir or Path("subcorticalSTRF/cochlea_meanrate/out/condition_psths")
+        
+        self.bez_data = None
+        self.cochlea_data = None
+        self.parameters = None
+        self.temporal_means = None
+    
+    def _load_bez_file(self):
+        """Load BEZ run-averaged file directly."""
+        bez_file = self.bez_dir / 'bez_acrossruns_psths.mat'
+        if not bez_file.exists():
+            raise FileNotFoundError(f'BEZ model PSTH data not found at: {bez_file}')
+        
+        bez_data = loadmat(str(bez_file), struct_as_record=False, squeeze_me=True)
+        return bez_data
+    
+    def _load_cochlea_file(self):
+        """Load Cochlea file directly."""
+        cochlea_file = self.cochlea_dir / 'cochlea_psths.mat'
+        if not cochlea_file.exists():
+            raise FileNotFoundError(f'Cochlea model PSTH data not found at: {cochlea_file}')
+        
+        cochlea_data = loadmat(str(cochlea_file), struct_as_record=False, squeeze_me=True)
+        return cochlea_data
+    
+    def load_bez_run_averaged(self, fiber_types: list = None):
+        """
+        Load BEZ data and compute run-averaged temporal means.
+        
+        Uses individual runs from psth_data_128fibers.mat and averages them.
+        
+        Args:
+            fiber_types: List of fiber types (default: ['hsr', 'msr', 'lsr'])
+            
+        Returns:
+            self (for method chaining)
+        """
+        if fiber_types is None:
+            fiber_types = ['hsr', 'msr', 'lsr']
+        
+        # Use functional API to load individual runs
+        self.bez_data, self.parameters = load_bez_psth_data()
+        
+        # Compute temporal means for all runs
+        temporal_means_with_runs = mean_across_time_psth_bez(
+            self.bez_data,
+            self.parameters,
+            fiber_types=fiber_types
+        )
+        
+        # Average across runs
+        self.temporal_means = average_across_runs(temporal_means_with_runs)
+        
+        return self
+    
+    def load_bez_individual_runs(self, fiber_types: list = None):
+        """
+        Load BEZ data with individual runs (psth_data_128fibers.mat).
+        
+        Args:
+            fiber_types: List of fiber types (default: ['hsr', 'msr', 'lsr'])
+            
+        Returns:
+            self (for method chaining)
+        """
+        if fiber_types is None:
+            fiber_types = ['hsr', 'msr', 'lsr']
+        
+        # Use functional API to load individual runs
+        self.bez_data, self.parameters = load_bez_psth_data()
+        self.temporal_means = mean_across_time_psth(
+            self.bez_data,
+            self.parameters,
+            fiber_types=fiber_types
+        )
+        
+        return self
+    
+    def load_cochlea(self, fiber_types: list = None):
+        """
+        Load Cochlea model data (cochlea_psths.mat).
+        
+        Args:
+            fiber_types: List of fiber types (default: ['hsr', 'msr', 'lsr'])
+            
+        Returns:
+            self (for method chaining)
+        """
+        if fiber_types is None:
+            fiber_types = ['hsr', 'msr', 'lsr']
+        
+        # Load Cochlea file directly
+        self.cochlea_data = self._load_cochlea_file()
+        
+        # Extract parameters as tuple and convert to dict
+        cfs, frequencies, dbs = extract_parameters(self.cochlea_data, model_type="cochlea", verbose=False)
+        self.parameters = {
+            'cfs': cfs,
+            'frequencies': frequencies,
+            'dbs': dbs
+        }
+        
+        self.temporal_means = mean_across_time_psth_cochlea(
+            self.cochlea_data,
+            self.parameters,
+            fiber_types=fiber_types
+        )
+        
+        return self
+    
+    def get_cfs(self):
+        """Get characteristic frequencies."""
+        if self.parameters is None:
+            return None
+        return self.parameters.get('cfs') if isinstance(self.parameters, dict) else self.parameters[0]
+    
+    def get_frequencies(self):
+        """Get stimulus frequencies."""
+        if self.parameters is None:
+            return None
+        return self.parameters.get('frequencies') if isinstance(self.parameters, dict) else self.parameters[1]
+    
+    def get_db_levels(self):
+        """Get dB SPL levels."""
+        if self.parameters is None:
+            return None
+        return self.parameters.get('dbs') if isinstance(self.parameters, dict) else self.parameters[2]
+    
+    def get_temporal_means(self):
+        """Get temporal mean firing rates."""
+        return self.temporal_means
+    
+    def get_raw_data(self):
+        """Get raw loaded data (BEZ or Cochlea)."""
+        return self.bez_data if self.bez_data is not None else self.cochlea_data
+
+
+class PopulationAnalyzer:
+    """
+    Computes weighted population averages from fiber type data.
+    
+    Combines HSR, MSR, and LSR responses using physiological ratios
+    to simulate overall auditory nerve population response.
+    """
+    
+    def __init__(self, weights: dict = None, normalize: bool = True):
+        """
+        Initialize population analyzer.
+        
+        Args:
+            weights: Dictionary with fiber type weights 
+                    {'hsr': 0.65, 'msr': 0.23, 'lsr': 0.12}
+                    If None, uses physiological defaults
+            normalize: If True, normalizes weights to sum to 1.0
+        """
+        # Default physiological weights
+        if weights is None:
+            weights = {'hsr': 0.65, 'msr': 0.23, 'lsr': 0.12}
+        
+        # Normalize weights if requested
+        if normalize:
+            total = sum(weights.values())
+            self.weights = {k: v / total for k, v in weights.items()}
+        else:
+            self.weights = weights
+        
+        logger.info(
+            f"PopulationAnalyzer initialized with weights: "
+            f"HSR={self.weights['hsr']:.3f}, MSR={self.weights['msr']:.3f}, "
+            f"LSR={self.weights['lsr']:.3f}"
+        )
+    
+    def compute_population_from_temporal_means(
+        self,
+        temporal_means: dict
+    ) -> dict:
+        """
+        Compute weighted population from temporal means dictionary.
+        
+        Args:
+            temporal_means: Nested dict [fiber_type][cf][freq][db] = value
+                           (for run-averaged data)
+                           OR [fiber_type][cf][freq][db][run] = value
+                           (for individual runs data)
+        
+        Returns:
+            Dictionary with population means: [cf][freq][db] = value
+        """
+        population_means = {}
+        
+        # Get structure from first fiber type
+        first_fiber = list(self.weights.keys())[0]
+        if first_fiber not in temporal_means:
+            raise ValueError(f"Fiber type '{first_fiber}' not found in temporal_means")
+        
+        # Iterate through CFs
+        for cf in temporal_means[first_fiber].keys():
+            population_means[cf] = {}
+            
+            for freq in temporal_means[first_fiber][cf].keys():
+                population_means[cf][freq] = {}
+                
+                for db in temporal_means[first_fiber][cf][freq].keys():
+                    # Weighted sum across fiber types
+                    weighted_sum = 0.0
+                    
+                    for fiber_type, weight in self.weights.items():
+                        if fiber_type not in temporal_means:
+                            logger.warning(f"Fiber type '{fiber_type}' not found, skipping")
+                            continue
+                        
+                        fiber_value = temporal_means[fiber_type][cf][freq][db]
+                        
+                        # Check if it's a dict (has runs) or a scalar
+                        if isinstance(fiber_value, dict):
+                            # Average across runs first, then weight
+                            run_mean = np.mean(list(fiber_value.values()))
+                            weighted_sum += weight * run_mean
+                        else:
+                            # Direct scalar value (run-averaged)
+                            weighted_sum += weight * fiber_value
+                    
+                    population_means[cf][freq][db] = weighted_sum
+        
+        logger.info(
+            f"Computed population means for {len(population_means)} CFs"
+        )
+        
+        return population_means
+    
+    def get_weights(self) -> dict:
+        """Get the current weights."""
+        return self.weights.copy()
+
+# ===============================================================================
+# FUNCTIONAL API (original functions - kept for backward compatibility)
+# ==============================================================================
 
 def convert_to_numeric(arr):
     """
@@ -428,6 +690,42 @@ def mean_across_time_psth_cochlea(cochlea_data, parameters, fiber_types=['hsr', 
         cochlea_data, parameters, fiber_types,
         has_runs=False, model_name="Cochlea"
     )
+
+
+def average_across_runs(temporal_means_with_runs):
+    """
+    Average temporal means across runs for BEZ model.
+    
+    Converts structure from [fiber_type][cf][freq][db][run] 
+    to [fiber_type][cf][freq][db] by averaging over runs.
+    
+    Parameters:
+    -----------
+    temporal_means_with_runs : dict
+        Nested dictionary [fiber_type][cf][freq][db][run] = mean_rate
+        
+    Returns:
+    --------
+    temporal_means_averaged : dict
+        Nested dictionary [fiber_type][cf][freq][db] = mean_rate (averaged over runs)
+    """
+    averaged = {}
+    
+    for fiber_type, cf_dict in temporal_means_with_runs.items():
+        averaged[fiber_type] = {}
+        
+        for cf_val, freq_dict in cf_dict.items():
+            averaged[fiber_type][cf_val] = {}
+            
+            for freq_val, db_dict in freq_dict.items():
+                averaged[fiber_type][cf_val][freq_val] = {}
+                
+                for db_val, run_dict in db_dict.items():
+                    # Average across all runs
+                    run_values = list(run_dict.values())
+                    averaged[fiber_type][cf_val][freq_val][db_val] = np.mean(run_values)
+    
+    return averaged
 
 
 ### These are the new functions, added after the initial ones above ### 
