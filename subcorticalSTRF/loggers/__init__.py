@@ -1,17 +1,47 @@
-""" 
-Folder management and experiment logging
-This package provides tools for organizing experiment results into 
-structured folders with automatic timestamping and metadata saving. 
-
-Example:
-from subcorticalSTRF.loggers import ExperimentFolderManager
-
-manager = (ExperimentFolderManager("./results", "bez2018")
-           .with_params(num_runs=10, num_cf=20, num_ANF=(4,4,4))
-           .create_batch_folder())
 """
-# Import the main user-facing class
-from .folder_manager import ExperimentFolderManager
+Folder management, logging configuration, and metadata saving utilities.
+
+This package provides tools for organizing experiment results, analysis
+outputs, and any workflow that requires structured folders with automatic
+timestamping, logging, and metadata saving.
+
+Main Components:
+    - FolderManager: Orchestrates folder creation with automatic naming and
+    metadata
+    - LoggingConfigurator: Sets up file and console logging
+    - MetadataSaver: Saves parameters/results to JSON, text, or YAML
+    - model_builders: Registry of naming functions for different use cases
+
+Example - Experiment workflow:
+    from loggers import FolderManager, LoggingConfigurator
+
+    # Create organized output folder
+    manager = (FolderManager("./results", "bez2018")
+               .with_params(num_runs=10, num_cf=20, num_ANF=(4,4,4))
+               .create_folder())
+
+    # Setup logging
+    LoggingConfigurator.setup_basic(manager.get_results_folder(),
+                                                'experiment.log')
+
+Example - Analysis workflow:
+    from loggers import FolderManager, LoggingConfigurator, MetadataSaver
+
+    # Custom folder naming
+    def analysis_namer(params, timestamp):
+        return f"analysis_{params['name']}_{timestamp}"
+
+    manager = FolderManager("./results", analysis_namer)
+    output_dir = manager.with_params(name="comparison").create_folder()
+
+    # Setup logging and save results
+    LoggingConfigurator.setup_basic(output_dir)
+    MetadataSaver().save_json(output_dir, results_dict)
+"""
+# Import the main user-facing classes
+from .folder_manager import FolderManager, ExperimentFolderManager
+# ExperimentFolderManager is alias for backward compatibility
+from .logging_configurator import LoggingConfigurator
 
 # Import the registry of the model builders
 from .model_builders import model_builders
@@ -23,8 +53,11 @@ from .timestamp_generator import TimestampGenerator, TimestampFormats
 
 # Define the public API
 __all__ = [
-    # Main class
-    "ExperimentFolderManager",
+    # Main classes
+    "FolderManager",
+    "ExperimentFolderManager",  # Backward compatibility
+    "LoggingConfigurator",
+
     # Registry for model builders
     "model_builders",
 

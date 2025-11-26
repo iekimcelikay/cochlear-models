@@ -1,6 +1,6 @@
 import thorns.waves
+from soundgen import SoundGen
 
-from soundgenDEP import SoundGen
 import matplotlib.pyplot as plt
 import numpy as np
 import sounddevice as sd
@@ -13,9 +13,8 @@ tau = 0.01
 sound_gen = SoundGen(sample_rate, tau)
 
 # # Create a single sound first (to check the ramping)
-tone = sound_gen.sound_maker(440, 1, 1, 0.5)
-normalized_tone = thorns.waves.set_dbspl(tone, 70)
-ramped_tone = sound_gen.ramp_in_out(normalized_tone)
+tone = sound_gen.sound_maker(700, 1, 1, 0.5, 60)
+ramped_tone = sound_gen.ramp_in_out(tone)
 
 
 sd.play(ramped_tone, samplerate=sample_rate )

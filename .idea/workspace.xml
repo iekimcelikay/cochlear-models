@@ -8,109 +8,43 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a35306b5-30cb-4033-a321-b6d334d7167d" name="Changes" comment="gitignore update">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/subcorticalSTRF.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Inheritance_method_for_sound.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alejandro_sound_script.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cochlea_DEMOS.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cochlea_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/first_file.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/Figures/testANmodel_estimatedMeanSpikeRate_PSTH.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/Figures/testANmodel_meanSynapticReleaseRate_meanSynapticRedockingTime_meanRelativeRefractoryPeriod.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/Figures/testANmodel_nrep=1_estimatedMeanSpikeRate_PSTH.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/Figures/testANmodel_nrep=1_meanSynapticReleaseRate_meanSynapticRedockingTime_meanRelativeRefractoryPeriod.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/Figures/testANmodel_nrep=1_synapticReleaseRate_meanofSpikeRate_VarianceInSpikeRate.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/Figures/testANmodel_synapticReleaseRate_meanofSpikeRate_VarianceInSpikeRate.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/Fs.ps" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/changelog.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/complex.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/complex.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/complex.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/compute_SIICC.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/defineit.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/ekim/synapse_wrapper.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/example_neurogram_code.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/ffGn_2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/find_CF_Threshold_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/fitaudiogram2.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/generateANpopulation.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/generate_neurogram_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/generate_neurogram_BEZ2018a_parallelized.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/load_AN_population_struct_by_type_then_cf.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/mexANmodel.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/model_IHC_BEZ2018a.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/model_IHC_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/model_IHC_BEZ2018a.mex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/model_IHC_BEZ2018a.mexa64" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/model_Synapse_BEZ2018a.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/model_Synapse_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/model_Synapse_BEZ2018a.mex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/model_Synapse_BEZ2018a.mexa64" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/plot_neurogram.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/readme.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/run_fiber_synapse_batch.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/testANmodel_BEZ2018a.asv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/testANmodel_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/testAdaptiveRedocking_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/testAnalyticalMeanVarCounts_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/testBestThresholdCurve_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/testFanoFactor_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/testPeriodhistogram_IO_Horst_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/testPopRateLevel_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/testPopRateLevel_BEZ2018a_commented.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/testSIICC_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/testSRHist_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/testSaturatedRate_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/testStdMean4SpikeTrainsYandB_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/testThreshSpont_BEZ2018a.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/an_simulator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/firing_rate_functions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/folder_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/soundgen.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/all_params_list.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/bruce2018_python/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/bruce2018_python/bruce2018_pipeline.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/bruce2018_python/rf_simulator_singletone_plot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/bruce2018_python/simulator_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/bruce2018_python/stimulus_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/bruce2018_python/subcorticalSTRF.sublime-project" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/bruce2018_python/subcorticalSTRF.sublime-workspace" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/bruce2018_python/untitled.sublime-workspace" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/cochlea_meanrate/cochlea_meanrate_function.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/load_synapseresults.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/meanrate_from_synapsedf.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/meanrate_from_synapsedf_loopANF.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/meanrate_from_synapsedf_oneANF.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/old_files/channel_arguments_ihc.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/old_files/number_of_cfs_cochlea.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/old_files/puretone_rf_data.npz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/old_files/rf_data.npz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/old_files/rf_simulator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/old_files/rf_simulator_singletone.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/old_files/run_bruce2018_DEP.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/old_files/run_bruce2018_v01.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/old_files/run_ihc_DEP.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/old_files/run_synapse_DEP.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subcorticalSTRF/run_model.py" afterDir="false" />
+    <list default="true" id="a35306b5-30cb-4033-a321-b6d334d7167d" name="Changes" comment="renamed">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phd_firstyear.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phd_firstyear.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/USAGE_STATISTICAL_TESTING.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_file.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/sound_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/sound_generator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/soundgenDEP.py" beforeDir="false" afterPath="$PROJECT_DIR$/soundgenDEP.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/run_fiber_synapse_batch_parfor.m" beforeDir="false" afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model/run_fiber_synapse_batch_parfor.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/CallHierarchy.txt" beforeDir="false" afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/CallHierarchy.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/matlab_interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/matlab_interface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/subcorticalSTRF/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/extract_psth_2807.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/run_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/run_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/soundgen.py" beforeDir="false" afterPath="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/soundgen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/cochlea_meanrate/cochlea_meanrate_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/subcorticalSTRF/cochlea_meanrate/cochlea_meanrate_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF/USAGE_STATISTICAL_TESTING.md" beforeDir="false" afterPath="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF/USAGE_STATISTICAL_TESTING.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF/convolutionHRF_bez_eachrun_231025.py" beforeDir="false" afterPath="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF/convolutionHRF_bez_eachrun_231025.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF/convolutionHRF_draft_221025.py" beforeDir="false" afterPath="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF/convolutionHRF_draft_221025.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF/convolution_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF/convolution_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF/info.md" beforeDir="false" afterPath="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF/info.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF/statistical_testing_bez_runs.py" beforeDir="false" afterPath="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF/statistical_testing_bez_runs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/meanrate_from_synapsedf_loopANF.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/run_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/subcorticalSTRF/run_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/stim_generator/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subcorticalSTRF/stim_generator/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/subcorticalSTRF/stim_generator/run.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -139,7 +73,7 @@
   }
 }</component>
   <component name="HierarchyBrowserManager">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
+    <option name="SCOPE" value="All" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/.venv/lib/python3.12/site-packages/matlab/engine/fevalfuture.py" root0="SKIP_INSPECTION" />
@@ -150,7 +84,6 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2vmFEwz8uZOXIgBKDr46huDrCtX" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -164,11 +97,18 @@
     "Python.cochlea_DEMOS.executor": "Debug",
     "Python.cochlea_meanrate_function.executor": "Debug",
     "Python.cochlea_test.executor": "Debug",
+    "Python.convolutionHRF_bez_eachrun_231025.executor": "Run",
+    "Python.convolutionHRF_draft_221025.executor": "Run",
     "Python.create_sound_sequence.executor": "Run",
     "Python.ihc_synapse_together.executor": "Run",
     "Python.load_synapseresults.executor": "Debug",
     "Python.meanrate_from_synapsedf.executor": "Run",
     "Python.meanrate_from_synapsedf_loopANF.executor": "Run",
+    "Python.python /home/ekim/PycharmProjects/subcorticalSTRF/subcorticalSTRF/convolution_HRF/statistical_testing_bez_runs.py \\.executor": "Run",
+    "Python.python convolutionHRF_draft_221025.py --model both --save-plots.executor": "Run",
+    "Python.python convolutionHRF_draft_221025.py --model both.executor": "Run",
+    "Python.python statistical_testing_bez_runs.py --help.executor": "Run",
+    "Python.python statistical_testing_bez_runs.py \\.executor": "Run",
     "Python.rf_simulator.executor": "Debug",
     "Python.rf_simulator_singletone.executor": "Debug",
     "Python.rf_simulator_singletone_plot.executor": "Run",
@@ -177,9 +117,10 @@
     "Python.run_bruce2018_v01.executor": "Debug",
     "Python.run_cochlea_with_wav.executor": "Run",
     "Python.run_ihc.executor": "Debug",
-    "Python.run_model.executor": "Run",
+    "Python.run_model (1).executor": "Run",
+    "Python.run_model.executor": "Debug",
     "Python.run_ratemodel_separated_by_anf_type.executor": "Run",
-    "Python.run_ratemodel_with_matlabwrapper.executor": "Run",
+    "Python.run_ratemodel_with_matlabwrapper.executor": "Debug",
     "Python.run_synapse.executor": "Run",
     "Python.run_zilany2014.executor": "Debug",
     "Python.scratch.executor": "Debug",
@@ -191,19 +132,24 @@
     "Python.scratch_8.executor": "Run",
     "Python.sound_generator.executor": "Run",
     "Python.soundgen.executor": "Debug",
+    "Python.statistical_testing_bez_runs.executor": "Run",
     "Python.stimulus_utils.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/ekim/PycharmProjects/subcorticalSTRF/subcorticalSTRF/BEZ2018_meanrate/BEZ2018a_model",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/home/ekim/PycharmProjects/phd_firstyear",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "run.code.analysis.last.selected.profile": "aDefault",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -220,38 +166,16 @@
       <recent name="$PROJECT_DIR$/subcorticalSTRF/stim_generator" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sensitivity_analysis" />
+      <recent name="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF" />
       <recent name="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate" />
       <recent name="$PROJECT_DIR$/subcorticalSTRF/rf_simulator/helperfunctions" />
       <recent name="$PROJECT_DIR$/subcorticalSTRF/rf_simulator/modelfunctions" />
-      <recent name="$PROJECT_DIR$/subcorticalSTRF/rf_simulator/figures" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.run_ratemodel_with_matlabwrapper">
-    <configuration name="cochlea_meanrate_function" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="subcorticalSTRF" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/subcorticalSTRF/cochlea_meanrate" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/subcorticalSTRF/cochlea_meanrate/cochlea_meanrate_function.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.python statistical_testing_bez_runs.py --help">
     <configuration name="cochlea_test" type="PythonConfigurationType" factoryName="Python">
-      <module name="subcorticalSTRF" />
+      <module name="phd_firstyear" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -274,8 +198,8 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="create_sound_sequence" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="subcorticalSTRF" />
+    <configuration name="convolutionHRF_bez_eachrun_231025" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="phd_firstyear" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -283,13 +207,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.12 (subcorticalSTRF)" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/create_sound_sequence.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF/convolutionHRF_bez_eachrun_231025.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -299,7 +222,7 @@
       <method v="2" />
     </configuration>
     <configuration name="create_sound_sequence" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="subcorticalSTRF" />
+      <module name="phd_firstyear" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -322,7 +245,7 @@
       <method v="2" />
     </configuration>
     <configuration name="ihc_synapse_together" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="subcorticalSTRF" />
+      <module name="phd_firstyear" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -345,7 +268,7 @@
       <method v="2" />
     </configuration>
     <configuration name="load_synapseresults" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="subcorticalSTRF" />
+      <module name="phd_firstyear" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -367,8 +290,8 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="rf_simulator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="subcorticalSTRF" />
+    <configuration name="python /home/ekim/PycharmProjects/subcorticalSTRF/subcorticalSTRF/convolution_HRF/statistical_testing_bez_runs.py \" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="phd_firstyear" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -376,13 +299,13 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/subcorticalSTRF/rf_simulator" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/subcorticalSTRF/rf_simulator/rf_simulator.py" />
-      <option name="PARAMETERS" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF/statistical_testing_bez_runs.py" />
+      <option name="PARAMETERS" value="\" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -390,8 +313,8 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="rf_simulator_singletone" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="subcorticalSTRF" />
+    <configuration name="python convolutionHRF_draft_221025.py --model both --save-plots" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="phd_firstyear" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -399,13 +322,59 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/subcorticalSTRF/rf_simulator" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/subcorticalSTRF/rf_simulator/rf_simulator_singletone.py" />
-      <option name="PARAMETERS" value="" />
+      <option name="SCRIPT_NAME" value="convolutionHRF_draft_221025.py" />
+      <option name="PARAMETERS" value="--model both --save-plots" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="python statistical_testing_bez_runs.py --help" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="phd_firstyear" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="statistical_testing_bez_runs.py" />
+      <option name="PARAMETERS" value="--help" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="python statistical_testing_bez_runs.py \" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="phd_firstyear" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="statistical_testing_bez_runs.py" />
+      <option name="PARAMETERS" value="\" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -414,7 +383,7 @@
       <method v="2" />
     </configuration>
     <configuration name="run_bruce2018_v01" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="subcorticalSTRF" />
+      <module name="phd_firstyear" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -437,7 +406,7 @@
       <method v="2" />
     </configuration>
     <configuration name="run_model" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="subcorticalSTRF" />
+      <module name="phd_firstyear" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -459,7 +428,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="run_ratemodel_with_matlabwrapper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="run_model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="subcorticalSTRF" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -473,7 +442,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/run_ratemodel_with_matlabwrapper.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/run_model.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -483,7 +452,7 @@
       <method v="2" />
     </configuration>
     <configuration name="scratch_7" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="subcorticalSTRF" />
+      <module name="phd_firstyear" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -511,29 +480,30 @@
       <item itemvalue="Python.ihc_synapse_together" />
       <item itemvalue="Python.load_synapseresults" />
       <item itemvalue="Python.run_bruce2018_v01" />
-      <item itemvalue="Python.run_model" />
       <item itemvalue="Python.scratch_7" />
-      <item itemvalue="Python.run_ratemodel_with_matlabwrapper" />
-      <item itemvalue="Python.cochlea_meanrate_function" />
+      <item itemvalue="Python.run_model" />
       <item itemvalue="Python.create_sound_sequence" />
-      <item itemvalue="Python.rf_simulator" />
-      <item itemvalue="Python.rf_simulator_singletone" />
+      <item itemvalue="Python.convolutionHRF_bez_eachrun_231025" />
+      <item itemvalue="Python.python /home/ekim/PycharmProjects/subcorticalSTRF/subcorticalSTRF/convolution_HRF/statistical_testing_bez_runs.py \" />
+      <item itemvalue="Python.python convolutionHRF_draft_221025.py --model both --save-plots" />
+      <item itemvalue="Python.python statistical_testing_bez_runs.py --help" />
+      <item itemvalue="Python.python statistical_testing_bez_runs.py \" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.run_ratemodel_with_matlabwrapper" />
-        <item itemvalue="Python.cochlea_meanrate_function" />
-        <item itemvalue="Python.rf_simulator_singletone" />
-        <item itemvalue="Python.rf_simulator" />
-        <item itemvalue="Python.create_sound_sequence" />
+        <item itemvalue="Python.python statistical_testing_bez_runs.py --help" />
+        <item itemvalue="Python.convolutionHRF_bez_eachrun_231025" />
+        <item itemvalue="Python.python /home/ekim/PycharmProjects/subcorticalSTRF/subcorticalSTRF/convolution_HRF/statistical_testing_bez_runs.py \" />
+        <item itemvalue="Python.python statistical_testing_bez_runs.py \" />
+        <item itemvalue="Python.python convolutionHRF_draft_221025.py --model both --save-plots" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PY-243.26574.90" />
-        <option value="bundled-python-sdk-c1fac28bca04-4df51de95216-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.26574.90" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-PY-252.26830.99" />
+        <option value="bundled-python-sdk-164cda30dcd9-0af03a5fa574-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.26830.99" />
       </set>
     </attachedChunks>
   </component>
@@ -619,7 +589,22 @@
       <workItem from="1753378601351" duration="3865000" />
       <workItem from="1753392071400" duration="2683000" />
       <workItem from="1753437104132" duration="175000" />
-      <workItem from="1753437298101" duration="4406000" />
+      <workItem from="1753437298101" duration="7866000" />
+      <workItem from="1753449986419" duration="740000" />
+      <workItem from="1753454743442" duration="2910000" />
+      <workItem from="1756913071208" duration="305000" />
+      <workItem from="1757427292098" duration="227000" />
+      <workItem from="1757508462520" duration="118000" />
+      <workItem from="1757515985437" duration="92000" />
+      <workItem from="1757516084135" duration="592000" />
+      <workItem from="1758062695527" duration="385000" />
+      <workItem from="1758063443454" duration="270000" />
+      <workItem from="1758114512195" duration="669000" />
+      <workItem from="1761131694413" duration="980000" />
+      <workItem from="1761143900893" duration="4869000" />
+      <workItem from="1761219574900" duration="30601000" />
+      <workItem from="1761654489318" duration="3431000" />
+      <workItem from="1763651957250" duration="24000" />
     </task>
     <task id="LOCAL-00001" summary="added sound.copy to ramp method. now stim and tone different">
       <option name="closed" value="true" />
@@ -773,7 +758,79 @@
       <option name="project" value="LOCAL" />
       <updated>1753443553468</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="gitignore update">
+      <option name="closed" value="true" />
+      <created>1753443940895</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1753443940895</updated>
+    </task>
+    <task id="LOCAL-00021" summary="this is the model folder of BEZ2018. includes my matlab wrappers.">
+      <option name="closed" value="true" />
+      <created>1753444037945</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1753444037945</updated>
+    </task>
+    <task id="LOCAL-00022" summary="cochlea methods here for now. should be moved later.">
+      <option name="closed" value="true" />
+      <created>1753444136509</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1753444136509</updated>
+    </task>
+    <task id="LOCAL-00023" summary="matlab relevant functions">
+      <option name="closed" value="true" />
+      <created>1753444161815</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1753444161815</updated>
+    </task>
+    <task id="LOCAL-00024" summary="results folder manager class. 24/07">
+      <option name="closed" value="true" />
+      <created>1753444188165</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1753444188165</updated>
+    </task>
+    <task id="LOCAL-00025" summary="trying class structure for model methods (ihc and synapse).">
+      <option name="closed" value="true" />
+      <created>1753445943670</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1753445943670</updated>
+    </task>
+    <task id="LOCAL-00026" summary="fixed the run_synapse parameters. hard-coded for now.">
+      <option name="closed" value="true" />
+      <created>1753450408109</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1753450408109</updated>
+    </task>
+    <task id="LOCAL-00027" summary="class structure works. removed cochlea dependencies">
+      <option name="closed" value="true" />
+      <created>1753450455828</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1753450455828</updated>
+    </task>
+    <task id="LOCAL-00028" summary="renamed">
+      <option name="closed" value="true" />
+      <created>1753450523393</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1753450523393</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -791,8 +848,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added sound.copy to ramp method. now stim and tone different" />
-    <MESSAGE value="now ramping works with tau=0.01" />
     <MESSAGE value="this script is old and not used." />
     <MESSAGE value="this script is old and not used. has initial methods." />
     <MESSAGE value="this script is the current developed one." />
@@ -810,7 +865,15 @@
     <MESSAGE value="stimulus_utils module (function based)" />
     <MESSAGE value="simulator_utils module (function based). ccontains run_ihc etc" />
     <MESSAGE value="gitignore update" />
-    <option name="LAST_COMMIT_MESSAGE" value="gitignore update" />
+    <MESSAGE value="this is the model folder of BEZ2018. includes my matlab wrappers." />
+    <MESSAGE value="cochlea methods here for now. should be moved later." />
+    <MESSAGE value="matlab relevant functions" />
+    <MESSAGE value="results folder manager class. 24/07" />
+    <MESSAGE value="trying class structure for model methods (ihc and synapse)." />
+    <MESSAGE value="fixed the run_synapse parameters. hard-coded for now." />
+    <MESSAGE value="class structure works. removed cochlea dependencies" />
+    <MESSAGE value="renamed" />
+    <option name="LAST_COMMIT_MESSAGE" value="renamed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -834,11 +897,6 @@
           <url>file://$PROJECT_DIR$/sound_generator.py</url>
           <line>104</line>
           <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/cochlea_DEMOS.py</url>
-          <line>15</line>
-          <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/cochlea/examples/run_zilany2014.py</url>
@@ -895,6 +953,16 @@
           <line>71</line>
           <option name="timeStamp" value="91" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate/run_model.py</url>
+          <line>124</line>
+          <option name="timeStamp" value="92" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/subcorticalSTRF/all_cfs_regression_analysis.py</url>
+          <line>21</line>
+          <option name="timeStamp" value="93" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -906,35 +974,44 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$cochlea_test.coverage" NAME="cochlea_test Coverage Results" MODIFIED="1752668460320" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$rf_simulator.coverage" NAME="rf_simulator Coverage Results" MODIFIED="1747668696336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/rf_simulator" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$scratch_1.coverage" NAME="scratch_1 Coverage Results" MODIFIED="1747064291886" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$cochlea_meanrate_function.coverage" NAME="cochlea_meanrate_function Coverage Results" MODIFIED="1753276120424" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/cochlea_meanrate" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$run_synapse.coverage" NAME="run_synapse Coverage Results" MODIFIED="1750356952644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/rf_simulator/modelfunctions" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$run_ratemodel_separated_by_anf_type.coverage" NAME="run_ratemodel_separated_by_anf_type Coverage Results" MODIFIED="1750854906944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$run_model.coverage" NAME="run_model Coverage Results" MODIFIED="1758114641297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF" />
     <SUITE FILE_PATH="coverage/subcorticalSTRF$ihc_synapse_together.coverage" NAME="ihc_synapse_together Coverage Results" MODIFIED="1750356913632" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/rf_simulator/modelfunctions" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$scratch_8.coverage" NAME="scratch_8 Coverage Results" MODIFIED="1750246831678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$meanrate_from_synapsedf_loopANF.coverage" NAME="meanrate_from_synapsedf_loopANF Coverage Results" MODIFIED="1750855524139" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$load_synapseresults.coverage" NAME="load_synapseresults Coverage Results" MODIFIED="1750697246914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$scratch_3.coverage" NAME="scratch_3 Coverage Results" MODIFIED="1749655022920" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$rf_simulator_singletone.coverage" NAME="rf_simulator_singletone Coverage Results" MODIFIED="1749128829120" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/rf_simulator" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$run_model.coverage" NAME="run_model Coverage Results" MODIFIED="1750693404699" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$create_sound_sequence.coverage" NAME="create_sound_sequence Coverage Results" MODIFIED="1746632364239" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$cochlea_DEMOS.coverage" NAME="cochlea_DEMOS Coverage Results" MODIFIED="1747063281508" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$run_cochlea_with_wav.coverage" NAME="run_cochlea_with_wav Coverage Results" MODIFIED="1752247271495" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/cochlea_jasmine" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$stimulus_utils.coverage" NAME="stimulus_utils Coverage Results" MODIFIED="1750767848488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/rf_simulator" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$meanrate_from_synapsedf.coverage" NAME="meanrate_from_synapsedf Coverage Results" MODIFIED="1750786080447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$run_ratemodel_with_matlabwrapper.coverage" NAME="run_ratemodel_with_matlabwrapper Coverage Results" MODIFIED="1753393283658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$sound_generator.coverage" NAME="sound_generator Coverage Results" MODIFIED="1747052410544" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$scratch_2.coverage" NAME="scratch_2 Coverage Results" MODIFIED="1747067210410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1745347785616" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/subcorticalSTRF$run_zilany2014.coverage" NAME="run_zilany2014 Coverage Results" MODIFIED="1747393733425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/cochlea/examples" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$run_bruce2018.coverage" NAME="run_bruce2018 Coverage Results" MODIFIED="1750246716759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/rf_simulator" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$soundgen.coverage" NAME="soundgen Coverage Results" MODIFIED="1749128739518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/stim_generator" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$scratch_2.coverage" NAME="scratch_2 Coverage Results" MODIFIED="1747067210410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$create_sound_sequence.coverage" NAME="create_sound_sequence Coverage Results" MODIFIED="1746632364239" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$scratch_3.coverage" NAME="scratch_3 Coverage Results" MODIFIED="1749655022920" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$statistical_testing_bez_runs.coverage" NAME="statistical_testing_bez_runs Coverage Results" MODIFIED="1761573486174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$python_statistical_testing_bez_runs_py___help.coverage" NAME="python statistical_testing_bez_runs.py --help Coverage Results" MODIFIED="1761576860296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$run_ratemodel_with_matlabwrapper.coverage" NAME="run_ratemodel_with_matlabwrapper Coverage Results" MODIFIED="1753447373033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$convolutionHRF_draft_221025.coverage" NAME="convolutionHRF_draft_221025 Coverage Results" MODIFIED="1761145714347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1745347785616" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/subcorticalSTRF$run_ihc.coverage" NAME="run_ihc Coverage Results" MODIFIED="1749642787550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/rf_simulator" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$rf_simulator_singletone_plot.coverage" NAME="rf_simulator_singletone_plot Coverage Results" MODIFIED="1747823717739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/rf_simulator" />
-    <SUITE FILE_PATH="coverage/subcorticalSTRF$scratch_4.coverage" NAME="scratch_4 Coverage Results" MODIFIED="1748011555968" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$cochlea_test.coverage" NAME="cochlea_test Coverage Results" MODIFIED="1752668460320" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/subcorticalSTRF$run.coverage" NAME="run Coverage Results" MODIFIED="1748422797445" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/stim_generator" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$run_model__1_.coverage" NAME="run_model (1) Coverage Results" MODIFIED="1758114738070" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/BEZ2018_meanrate" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$cochlea_meanrate_function.coverage" NAME="cochlea_meanrate_function Coverage Results" MODIFIED="1758114633717" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/cochlea_meanrate" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$scratch_1.coverage" NAME="scratch_1 Coverage Results" MODIFIED="1747064291886" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$sound_generator.coverage" NAME="sound_generator Coverage Results" MODIFIED="1747052410544" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/subcorticalSTRF$run_bruce2018_v01.coverage" NAME="run_bruce2018_v01 Coverage Results" MODIFIED="1750689254359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/rf_simulator" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$load_synapseresults.coverage" NAME="load_synapseresults Coverage Results" MODIFIED="1750697246914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$scratch_4.coverage" NAME="scratch_4 Coverage Results" MODIFIED="1748011555968" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$rf_simulator.coverage" NAME="rf_simulator Coverage Results" MODIFIED="1747668696336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/rf_simulator" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$convolutionHRF_bez_eachrun_231025.coverage" NAME="convolutionHRF_bez_eachrun_231025 Coverage Results" MODIFIED="1761575296873" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$rf_simulator_singletone.coverage" NAME="rf_simulator_singletone Coverage Results" MODIFIED="1749128829120" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/rf_simulator" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$meanrate_from_synapsedf_loopANF.coverage" NAME="meanrate_from_synapsedf_loopANF Coverage Results" MODIFIED="1750855524139" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$cochlea_DEMOS.coverage" NAME="cochlea_DEMOS Coverage Results" MODIFIED="1747063281508" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$rf_simulator_singletone_plot.coverage" NAME="rf_simulator_singletone_plot Coverage Results" MODIFIED="1747823717739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/rf_simulator" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$meanrate_from_synapsedf.coverage" NAME="meanrate_from_synapsedf Coverage Results" MODIFIED="1750786080447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$soundgen.coverage" NAME="soundgen Coverage Results" MODIFIED="1749128739518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/stim_generator" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$run_ratemodel_separated_by_anf_type.coverage" NAME="run_ratemodel_separated_by_anf_type Coverage Results" MODIFIED="1750854906944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$python_convolutionHRF_draft_221025_py___model_both.coverage" NAME="python convolutionHRF_draft_221025.py --model both Coverage Results" MODIFIED="1761225477173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$python__home_ekim_PycharmProjects_subcorticalSTRF_subcorticalSTRF_convolution_HRF_statistical_testing_bez_runs_py__.coverage" NAME="python /home/ekim/PycharmProjects/subcorticalSTRF/subcorticalSTRF/convolution_HRF/statistical_testing_bez_runs.py \ Coverage Results" MODIFIED="1761575273623" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$python_convolutionHRF_draft_221025_py___model_both___save_plots.coverage" NAME="python convolutionHRF_draft_221025.py --model both --save-plots Coverage Results" MODIFIED="1761225519974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/convolution_HRF" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$run_bruce2018.coverage" NAME="run_bruce2018 Coverage Results" MODIFIED="1750246716759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/rf_simulator" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$scratch_8.coverage" NAME="scratch_8 Coverage Results" MODIFIED="1750246831678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$python_statistical_testing_bez_runs_py__.coverage" NAME="python statistical_testing_bez_runs.py \ Coverage Results" MODIFIED="1761574955414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$run_synapse.coverage" NAME="run_synapse Coverage Results" MODIFIED="1750356952644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/rf_simulator/modelfunctions" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$stimulus_utils.coverage" NAME="stimulus_utils Coverage Results" MODIFIED="1750767848488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/rf_simulator" />
+    <SUITE FILE_PATH="coverage/subcorticalSTRF$run_cochlea_with_wav.coverage" NAME="run_cochlea_with_wav Coverage Results" MODIFIED="1752247271495" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/subcorticalSTRF/cochlea_jasmine" />
   </component>
 </project>

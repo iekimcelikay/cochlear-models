@@ -22,13 +22,15 @@ class SoundGen:
         self.tau = tau
 
 
-    def sound_maker(self, freq, num_harmonics, tone_duration, harmonic_factor):
+    def sound_maker(self, freq, num_harmonics, tone_duration, harmonic_factor, dbspl=60):
         """
+        Generate a harmonic complex tone.
+        
         :param freq: Base frequency in Hz.
         :param num_harmonics: Number of harmonic tones.
         :param tone_duration: Duration of each tone in seconds.
         :param harmonic_factor: Harmonic amplitude decay factor for each tone.
-        :param dbspl: Desired dbspl (loudness) level.
+        :param dbspl: Desired dbspl (loudness) level (default: 60 dB).
         :return: sound: np.ndarray: array of audio samples representing the harmonic complex tone.
         """
         # Create the time array
@@ -42,8 +44,8 @@ class SoundGen:
             amplitude = harmonic_factor ** (k - 1)
             sound = sound + amplitude * harmonic
         
-        # TODO: call thorns to normalize to a certain dbspl level 
-        normalized_sound = thorns.waves.set_dbspl(sound, 60)  # Example: set to 70 dB SPL
+        # Normalize to desired dbspl level 
+        normalized_sound = thorns.waves.set_dbspl(sound, dbspl)
         max_amplitude = 0.2753 # found this value in simulation, `maxamp_simulation.py`
         normalized_sound = normalized_sound / (max_amplitude + 0.01)  
         

@@ -226,8 +226,8 @@ tone_sequence = cond1.generate_sequence()
 tone_sequence = sound1.normalize(tone_sequence)
 
 # Play the generated sound sequence
-#sd.play(tone_sequence, sound1.sample_rate)
-#sd.wait()  # Wait until the sound has finished playing
+sd.play(tone_sequence, sound1.sample_rate)
+sd.wait()  # Wait until the sound has finished playing
 
 ## CONDITION 2: on:133 ms, isi:200 ms
 sound2 = CreateSound(
@@ -324,8 +324,8 @@ sound8 = CreateSound(
 
 cond8 = SoundSequence(sound_object=sound8, total_duration=5.0, isi= 0.200)
 tone_sequence8 = cond8.generate_sequence()
-sd.play(tone_sequence8, sound8.sample_rate)
-sd.wait()
+# sd.play(tone_sequence8, sound8.sample_rate)
+# sd.wait()
 
 # CONDITION 9: On: 5000 ms, isi:0 ms
 sound9 = CreateSound(

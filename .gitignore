@@ -1,4 +1,6 @@
 
+__pycache__/
+
 *.png
 /soch.py
 *.sublime-workspace
@@ -27,6 +29,7 @@ subcorticalSTRF/BEZ2018_meanrate/results/
 *.json
 *.csv
 *.txt
+*.npz
 
 /scientificdayposter/
 moch.py
@@ -34,3 +37,9 @@ moch.py
 .idea/vcs.xml
 phd_firstyear.code-workspace
 .idea/modules.xml
+subcorticalSTRF/analyses/convolution_HRF/output/COCHLEA_convolved_responses_hsr_20251028_195912.pkl
+*.pkl
+.idea/modules.xml
+.idea/phd_firstyear.iml
+.idea/vcs.xml
+subcorticalSTRF/model_comparisons/results/wsr_vs_cochlea_population/wsr_vs_cochlea_regression.npz

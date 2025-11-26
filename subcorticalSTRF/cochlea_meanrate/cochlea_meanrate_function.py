@@ -10,21 +10,24 @@ from cochlea.zilany2014 import calc_cfs
 import sys
 import time
 import gc
-from subcorticalSTRF.stim_generator import SoundGen
+
+from soundgen import SoundGen
 from scipy.io import savemat
 from scipy.signal import decimate
 import numpy.random as rnd
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+
 # ----------- Parameter Setup -----------
 
 peripheral_fs = 100e3
 min_cf = 125
 max_cf = 2500
-num_cf = 3
+num_cf = 10
 fs_target = 1000
-num_ANF = (16,16,16)
+num_ANF = (128,128,128)
+num_runs = 1
 downsample_rate = int(round(peripheral_fs / fs_target))
 
 num_harmonics = 1
@@ -32,7 +35,7 @@ duration = 0.200
 harmonic_factor = 0.5
 sample_rate = 100e3
 tau_ramp = 0.01
-num_tones = 5
+num_tones = 20
 freq_range = (125, 2500, num_tones)
 db_range = (50, 90, 10)
 
@@ -50,10 +53,11 @@ def generate_ramped_tone(sound_gen, freq, num_harmonics, duration, harmonic_fact
 def simulate_one_run(run):
     print("Running simulation for run {}".format(run))
 
-    seed_base = rnd.randint(100, 1000, 1)
-
-    unique_seed = seed_base + run
+    # ----------- Generate a fully unique seed per run -----------
+    unique_seed = (int(time.time() * 1e6) + os.getpid() + run) % (2**32)
+    np.random.seed(unique_seed)
     print("Unique seed is {}".format(unique_seed))
+
 
     all_meta_rows = []
     all_spikes_list = []
@@ -66,7 +70,7 @@ def simulate_one_run(run):
             print("Generating tone at {:.1f} Hz and {:d} dB SPL".format(freq, int(db)))
 
             my_tone = generate_ramped_tone(sound_gen, freq, num_harmonics, duration, harmonic_factor, db)
-            trains_acc = sound_gen.cochlea_rate_manual(my_tone, peripheral_fs, num_cf, num_ANF, seed=unique_seed)
+            trains_acc = sound_gen.cochlea_rate_manual(my_tone, peripheral_fs,min_cf, max_cf,  num_cf, num_ANF, seed=unique_seed)
             trains_acc.sort_values(['cf', 'type'], ascending=[True, True], inplace=True)
 
             signal_array = th.trains_to_array(trains_acc, peripheral_fs).T
@@ -112,10 +116,17 @@ def simulate_one_run(run):
         'db': db_array,
         'spikes': spikes_array,
         'run': run_array,
+        'params': {
+            'num_cf': num_cf,
+            'num_tones': num_tones,
+            'num_ANF': num_ANF,
+            'peripheral_fs': peripheral_fs,
+            'stim_duration': duration
+        }
     }
 
     num_hsr, num_msr, num_lsr = num_ANF
-    filename = "cochlea_spike_rates_numcf_{:d}_numtonefreq_{:d}_hml_{:d}_{:d}_{:d}_run{:d}_nonacc.mat".format(
+    filename = "cochlea_spike_rates_numcf_{:d}_numtonefreq_{:d}_hml_{:d}_{:d}_{:d}_run{:03d}_nonacc.mat".format(
         num_cf, num_tones, num_hsr, num_msr, num_lsr, run)
     savemat(filename, mat_data, oned_as='column')
     print("Saved full run to: {}".format(filename))
@@ -129,9 +140,11 @@ def simulate_one_run(run):
 if __name__ == '__main__':
     import multiprocessing
     start = time.time()
-    num_runs = 1
-    pool = multiprocessing.Pool(processes=14)
-    pool.map(simulate_one_run, range(num_runs))
+
+    num_cores = multiprocessing.cpu_count() - 1
+
+    pool = multiprocessing.Pool(processes=num_cores)
+    pool.map(simulate_one_run, xrange(num_runs))
     pool.close()
     pool.join()
     print("Finished all runs in {:.2f} seconds".format(time.time() - start))
