@@ -32,3 +32,5 @@ subcorticalSTRF/BEZ2018_meanrate/results/
 moch.py
 .idea/phd_firstyear.iml
 .idea/vcs.xml
+phd_firstyear.code-workspace
+.idea/modules.xml
