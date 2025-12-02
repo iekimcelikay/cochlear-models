@@ -1,10 +1,13 @@
 """
-Folder management, logging configuration, and metadata saving utilities.
+Stimulus and simulation parameter management, folder management,
+logging configuration, and metadata saving utilities.
 
-This package provides tools for organizing experiment results, analysis
-outputs, and any workflow that requires structured folders with automatic
+This package provides tools for creating stimulus parameters,
+organizing experiment results, analysis outputs,
+and any workflow that requires structured folders with automatic
 timestamping, logging, and metadata saving.
 
+# TODO: update this docstring
 Main Components:
     - FolderManager: Orchestrates folder creation with automatic naming and
     metadata
@@ -13,7 +16,7 @@ Main Components:
     - model_builders: Registry of naming functions for different use cases
 
 Example - Experiment workflow:
-    from loggers import FolderManager, LoggingConfigurator
+    from utils import FolderManager, LoggingConfigurator
 
     # Create organized output folder
     manager = (FolderManager("./results", "bez2018")
@@ -25,7 +28,7 @@ Example - Experiment workflow:
                                                 'experiment.log')
 
 Example - Analysis workflow:
-    from loggers import FolderManager, LoggingConfigurator, MetadataSaver
+    from utils import FolderManager, LoggingConfigurator, MetadataSaver
 
     # Custom folder naming
     def analysis_namer(params, timestamp):
@@ -49,6 +52,7 @@ from .model_builders import model_builders
 # Import other components for potential direct use
 from .folder_creator import FolderCreator
 from .metadata_saver import MetadataSaver
+from .result_saver import ResultSaver, save_results
 from .timestamp_generator import TimestampGenerator, TimestampFormats
 
 # Define the public API
@@ -64,6 +68,8 @@ __all__ = [
     # Other components
     "FolderCreator",
     "MetadataSaver",
+    "ResultSaver",
+    "save_results",
     "TimestampGenerator",
     "TimestampFormats"
 ]
