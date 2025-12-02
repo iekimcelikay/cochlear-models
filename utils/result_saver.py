@@ -165,7 +165,8 @@ class ResultSaver:
                 compressed=kwargs.get('compressed', True)
             )
 
-        logger.info(f"Saved {len(formats)} formats: {list(saved_paths.keys())}")
+        logger.info(f"Saved {len(formats)} "
+                    f"formats: {list(saved_paths.keys())}")
         return saved_paths
 
     def load_pickle(self, filename: str = "results.pkl") -> Any:
