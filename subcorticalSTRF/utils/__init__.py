@@ -1,45 +1,60 @@
 """
-Stimulus and simulation parameter management, folder management,
-logging configuration, and metadata saving utilities.
+Folder management, logging, metadata, and result saving utilities.
 
-This package provides tools for creating stimulus parameters,
-organizing experiment results, analysis outputs,
-and any workflow that requires structured folders with automatic
-timestamping, logging, and metadata saving.
+This package provides tools for organizing experiment results, analysis outputs,
+and any workflow that requires structured folders with automatic timestamping,
+logging, metadata saving, and multi-format result persistence.
 
-# TODO: update this docstring
 Main Components:
-    - FolderManager: Orchestrates folder creation with automatic naming and
-    metadata
-    - LoggingConfigurator: Sets up file and console logging
-    - MetadataSaver: Saves parameters/results to JSON, text, or YAML
-    - model_builders: Registry of naming functions for different use cases
+    - FolderManager: Orchestrates folder creation with automatic naming and metadata
+    - LoggingConfigurator: Sets up file and console logging with proper formatting
+    - MetadataSaver: Saves experiment parameters to JSON, text, or YAML formats
+    - ResultSaver: Saves simulation results in multiple formats (pickle, MATLAB, NPZ)
+    - model_builders: Registry of naming functions for different model types
 
 Example - Experiment workflow:
-    from utils import FolderManager, LoggingConfigurator
+    from utils import FolderManager, LoggingConfigurator, ResultSaver
 
     # Create organized output folder
-    manager = (FolderManager("./results", "bez2018")
-               .with_params(num_runs=10, num_cf=20, num_ANF=(4,4,4))
-               .create_folder())
+    manager = FolderManager("./results", "cochlea_zilany2014")
+    manager.with_params(num_runs=10, num_cf=20, num_ANF=(128, 128, 128))
+    output_dir = manager.create_folder()
 
     # Setup logging
-    LoggingConfigurator.setup_basic(manager.get_results_folder(),
-                                                'experiment.log')
+    LoggingConfigurator.setup_basic(output_dir, 'experiment.log')
+
+    # Run experiment
+    results = run_simulation()
+
+    # Save results in multiple formats
+    saver = ResultSaver(output_dir)
+    saver.save_all(results, base_filename='results', formats=['pickle', 'mat'])
 
 Example - Analysis workflow:
     from utils import FolderManager, LoggingConfigurator, MetadataSaver
 
-    # Custom folder naming
-    def analysis_namer(params, timestamp):
-        return f"analysis_{params['name']}_{timestamp}"
+    # Create analysis output folder
+    manager = FolderManager("./results", "model_comparison")
+    output_dir = manager.with_params(
+        model1='cochlea',
+        model2='wsr',
+        comparison_type='temporal_mean'
+    ).create_folder()
 
-    manager = FolderManager("./results", analysis_namer)
-    output_dir = manager.with_params(name="comparison").create_folder()
-
-    # Setup logging and save results
+    # Setup logging and save metadata
     LoggingConfigurator.setup_basic(output_dir)
-    MetadataSaver().save_json(output_dir, results_dict)
+    MetadataSaver().save_json(output_dir, analysis_params, 'metadata.json')
+
+Example - Quick result saving:
+    from utils import save_results
+
+    # Convenience function for quick saves
+    paths = save_results(
+        data=my_results,
+        save_dir='./output',
+        filename='experiment_001',
+        formats=['pickle', 'mat', 'npz']
+    )
 """
 # Import the main user-facing classes
 from .folder_manager import FolderManager, ExperimentFolderManager
