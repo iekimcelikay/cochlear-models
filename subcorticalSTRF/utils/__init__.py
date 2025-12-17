@@ -7,6 +7,7 @@ logging, metadata saving, and multi-format result persistence.
 
 Main Components:
     - FolderManager: Orchestrates folder creation with automatic naming and metadata
+    - FolderCreator: Low-level filesystem operations for directory creation
     - LoggingConfigurator: Sets up file and console logging with proper formatting
     - MetadataSaver: Saves experiment parameters to JSON, text, or YAML formats
     - ResultSaver: Saves simulation results in multiple formats (pickle, MATLAB, NPZ)
@@ -57,7 +58,7 @@ Example - Quick result saving:
     )
 """
 # Import the main user-facing classes
-from .folder_manager import FolderManager, ExperimentFolderManager
+from .folder_management import FolderCreator, FolderManager, ExperimentFolderManager
 # ExperimentFolderManager is alias for backward compatibility
 from .logging_configurator import LoggingConfigurator
 
@@ -65,7 +66,7 @@ from .logging_configurator import LoggingConfigurator
 from .model_builders import model_builders
 
 # Import other components for potential direct use
-from .folder_creator import FolderCreator
+
 from .metadata_saver import MetadataSaver
 from .result_saver import ResultSaver, save_results
 from .timestamp_generator import TimestampGenerator, TimestampFormats
