@@ -139,8 +139,10 @@ class FolderManager(object):
         """
         return self.results_folder
 
+
 # Backward compatibility alias
 ExperimentFolderManager = FolderManager
+
 
 # Usage examples:
 #
@@ -184,5 +186,3 @@ ExperimentFolderManager = FolderManager
 
 # manager.create_subfolder("plots")
 # manager.create_subfolder("raw_data")
-
-
