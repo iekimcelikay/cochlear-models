@@ -9,79 +9,6 @@ import numpy as np
 from scipy.io import savemat, loadmat
 import os
 
-def spike_mean_rate():
-    return
-
-def spike_timing():
-    return
-
-
-def calc_cfs(cf, species):
-    if np.isscalar(cf):
-        cfs = [float(cf)]
-
-    elif isinstance(cf, tuple) and ('cat' in species):
-        # Based on GenerateGreenwood_CFList() from DSAM
-        # Liberman (1982)
-        aA = 456
-        k = 0.8
-        a = 2.1
-
-        freq_min, freq_max, freq_num = cf
-
-        xmin = np.log10(freq_min / aA + k) / a
-        xmax = np.log10(freq_max / aA + k) / a
-
-        x_map = np.linspace(xmin, xmax, freq_num)
-        cfs = aA * ( 10**( a*x_map ) - k)
-
-    elif isinstance(cf, tuple) and ('human' in species):
-        # Based on GenerateGreenwood_CFList() from DSAM
-        # Liberman (1982)
-        aA = 165.4
-        k = 0.88
-        a = 2.1
-
-        freq_min, freq_max, freq_num = cf
-
-        xmin = np.log10(freq_min / aA + k) / a
-        xmax = np.log10(freq_max / aA + k) / a
-
-        x_map = np.linspace(xmin, xmax, freq_num)
-        cfs = aA * ( 10**( a*x_map ) - k)
-
-    elif isinstance(cf, list) or isinstance(cf, np.ndarray):
-        cfs = cf
-
-    else:
-        raise RuntimeError("CF must be a scalar, a tuple or a list.")
-
-    return cfs
-
-def greenwood_human(cf):
-        if np.isscalar(cf):
-            cfs = [float(cf)]
-
-        elif isinstance(cf, tuple):
-            #Based on Greenwood (1990) parameters, function based on 'calc_cfs' from cochlea package.
-            aA = 165.4
-            k = 0.88
-            a = 2.1
-
-            freq_min, freq_max, freq_num = cf
-
-            xmin = np.log10(freq_min / aA + k) / a
-            xmax = np.log10(freq_max / aA + k) / a
-
-            x_map = np.linspace(xmin, xmax, freq_num)
-            cfs = aA * ( 10**( a*x_map ) - k)
-        elif isinstance(cf, list) or isinstance(cf, np.ndarray):
-            cfs = cf
-        else:
-            raise RuntimeError("CF must be a scalar, a tuple or a list.")
-
-        return cfs
-
 
 
 def generateANpopulation(numcfs,numsponts):
@@ -228,7 +155,7 @@ def get_fiber_struct_array(cf_idx, sponts, tabss, trels, num_ANF, eng):
             fiber_idx += 1
 
 
-    
+
 
 def get_fiber_params(cf_idx, sponts, tabss, trels, num_ANF):
 
