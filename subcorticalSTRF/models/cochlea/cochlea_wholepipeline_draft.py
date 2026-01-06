@@ -305,6 +305,63 @@ class CochleaProcessor:
                 logger.error(f"Failed procesing {freq:.1f}Hz @ {db}dB: {e}")
                 raise
 
+    def process_wavfile(self, sound: np.ndarray,
+                     identifier: str = "sound",
+                        metadata: dict = None):
+        """
+        Docstring for process_wavfile
+
+        :param self: Description
+        :param sound: Description
+        :type sound: np.ndarray
+        :param identifier: Description
+        :type identifier: str
+        :param metadata: Description
+        :type metadata: dict
+
+        Returns:
+            dict: Results containing:
+            - mean_rates: Dict[fiber_type, array(num_cf)]
+            - psth: Dict[fiber_type, array(num_cf, n_bins)]
+            - cf_list: Array of CFs
+            - duration: Sound duration
+            - time_axis: Time axis for PSTH
+            - identifier: Sound identifier
+            - metadata: Any provided metadata
+
+        """
+        logger.info(f"Processing sound: {identifier}")
+
+        try:
+            trains = self._run_cochlea_model(sound)
+            spike_array, cf_list, duration = self._convert_to_array(trains)
+            mean_rates, psth = self._aggregate_by_fiber_type(
+                trains, spike_array, cf_list, duration
+                )
+
+            result = {
+                'soundfileid': identifier,
+                'mean_rates': mean_rates,
+                'psth': psth,
+                'cf_list': cf_list,
+                'duration': duration,
+                'time_axis': self._time_axis,
+                }
+
+            # Include any provided metadata
+            if metadata:
+                result['metadata'] = metadata
+
+            # Memory cleanup
+            del trains, spike_array
+
+            return result
+
+        except Exception as e:
+            logger.error(f"Failed processing {identifier}: {e}")
+            raise
+
+
 # ================= Simulation Orchestrator (Uses Utils) ================
 
 class CochleaSimulation:
@@ -563,70 +620,70 @@ class CochleaSimulation:
             logger.debug(f"Saved {stim_id}")
 
         logger.info(f"Saved {len(stim_results)} stimulus response files")
-        
+
         # Save consolidated results (mean rates only)
         self._save_consolidated_results(stim_results)
 
     def _save_consolidated_results(self, stim_results: dict):
         """Save consolidated mean rates across all stimuli in a single file.
-        
+
         Creates arrays organized by fiber type with shape (num_freq, num_db, num_cf).
         Only includes mean rates, not PSTHs, for memory efficiency.
-        
+
         Args:
             stim_results: Dictionary of results organized by stimulus
         """
         if not self.config.save_mean_rates:
             logger.info("Skipping consolidated results (save_mean_rates=False)")
             return
-        
+
         # Extract metadata
         first_stim = list(stim_results.values())[0]
         cf_list = first_stim['cf_list']
         fiber_types = first_stim['fiber_types']
-        
+
         # Extract unique frequencies and db levels
         frequencies = sorted(set(s['freq'] for s in stim_results.values()))
         db_levels = sorted(set(s['db'] for s in stim_results.values()))
-        
+
         # Initialize arrays: (num_freq, num_db, num_cf) per fiber type
         num_freq = len(frequencies)
         num_db = len(db_levels)
         num_cf = len(cf_list)
-        
+
         consolidated_data = {
             'cf_list': cf_list,
             'frequencies': np.array(frequencies),
             'db_levels': np.array(db_levels),
             'fiber_types': fiber_types
         }
-        
+
         # Organize mean rates by fiber type (flatten to avoid nested dict)
         for fiber_type in fiber_types:
             mean_rate_array = np.zeros((num_freq, num_db, num_cf))
-            
+
             for stim_id, stim_data in stim_results.items():
                 freq = stim_data['freq']
                 db = stim_data['db']
-                
+
                 freq_idx = frequencies.index(freq)
                 db_idx = db_levels.index(db)
-                
+
                 mean_rate_array[freq_idx, db_idx, :] = stim_data['mean_rates'][fiber_type]
-            
+
             # Store as top-level key to avoid .item() unwrapping
             consolidated_data[f'mean_rates_{fiber_type}'] = mean_rate_array
-        
+
         # Save consolidated file
         filename = f"{self.config.experiment_name}_consolidated_mean_rates"
-        
+
         if 'npz' in self.config.save_formats:
             self.result_saver.save_npz(consolidated_data, f"{filename}.npz")
         if 'pkl' in self.config.save_formats:
             self.result_saver.save_pickle(consolidated_data, f"{filename}.pkl")
         if 'mat' in self.config.save_formats:
             self.result_saver.save_mat(consolidated_data, f"{filename}.mat")
-        
+
         logger.info(f"Saved consolidated results: {num_freq} freq × {num_db} dB × {num_cf} CF")
 
 # ================= Testing ================
@@ -639,8 +696,8 @@ if __name__ == '__main__':
         powerlaw= 'approximate',
         db_range=[60],
         freq_range=(125,2500,10),
-        output_dir="./models_output/cochlea_test011_approximate",
-        experiment_name="test011",    # Prefix for all output files
+        output_dir="./models_output/cochlea_test012_approximate",
+        experiment_name="test012",    # Prefix for all output files
 
         # Output format control
         save_formats=['npz'],         # Only save NPZ files
