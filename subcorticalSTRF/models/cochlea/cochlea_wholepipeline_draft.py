@@ -10,16 +10,19 @@
 # multiprocessing settings: num_cores
 
 # new cochlea is in my local folder, subcorticalSTRF/cochlea
-
+import gc
 import numpy as np
 import logging
 import sys
 import time
 import pandas as pd
+import soundfile as sf
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Tuple
 from cochlea.zilany2014 import run_zilany2014
+from cochlea.zilany2014 import run_zilany2014_rate
+from cochlea.zilany2014.util import calc_cfs # noqa: E402
 
 # Add parent directories to path for imports to resolve modules
 # - project_root: parent of models/ for loggers, stim_generator
@@ -83,22 +86,34 @@ class CochleaConfig:
     log_file_level: str = 'INFO'      # File output level
     log_filename: str = 'simulation.log'  # Log filename
 
-    def get_cochlea_kwargs(self):
-        """Build keyword arguments for cochlea.run_zilany2014().
+    def get_cochlea_kwargs(self, include_anf_num: bool = True):
+        """Build keyword arguments for zilany2014 functions.
+
+        Args:
+            include_anf_num: If True, includes anf_num and seed for run_zilany2014().
+                            If False, includes anf_types for run_zilany2014_rate().
 
         Returns:
-            Dictionary with all parameters needed by the cochlea function.
+            Dictionary with appropriate parameters.
         """
-        return {
-            'anf_num': self.num_ANF,
+        kwargs = {
             'cf': (self.min_cf, self.max_cf, self.num_cf),
             'species': self.species,
-            'seed': self.seed,
             'cohc': self.cohc,
             'cihc': self.cihc,
             'powerlaw': self.powerlaw,
             'ffGn': self.ffGn
         }
+
+        if include_anf_num:
+            # For run_zilany2014 (spike trains)
+            kwargs['anf_num'] = self.num_ANF
+            kwargs['seed'] = self.seed
+        else:
+            # For run_zilany2014_rate (mean rates)
+            kwargs['anf_types'] = list(self.anf_types)
+
+        return kwargs
 
     def get_stimulus_params(self):
         """ For stimulus generation."""
@@ -132,6 +147,7 @@ class CochleaConfig:
 # ==================== Cochlea Processor ====================
 
 import thorns as th
+import thorns.waves as wv
 
 logger = logging.getLogger(__name__)
 
@@ -152,6 +168,13 @@ class CochleaProcessor:
         self.config = config
         self._time_axis = None # Cache time axis
 
+        # Calculate cf_list then to pass to rate function
+        self._cf_list = calc_cfs(
+            cf=(self.config.min_cf, self.config.max_cf, self.config.num_cf),
+            species=self.config.species
+            )
+        logger.debug(f"CF list: {len(self._cf_list)} CFs from {self._cf_list[0]:.1f} to {self._cf_list[-1]:.1f} Hz")
+
     # ============ Pipeline Step 1: Run Model ============
 
     def _run_cochlea_model(self, tone: np.ndarray) -> pd.DataFrame:
@@ -162,10 +185,38 @@ class CochleaProcessor:
         trains = run_zilany2014(
             tone,
             self.config.peripheral_fs,
-            **self.config.get_cochlea_kwargs()
+            **self.config.get_cochlea_kwargs(include_anf_num=True)
             )
         trains.sort_values(['cf', 'type'], ascending=[True, True], inplace=True)
         return trains
+
+    def _run_cochlea_rate_model(self, tone: np.ndarray) -> pd.DataFrame:
+        """
+        To use the analytical estimation of synaptic rate from synaptic output.
+
+        Returns instantaneous rates at each time sample (peripheral_fs), NOT mean rates
+        nor individual ANF responses.
+
+        Args:
+            tone: Audio stimulus array
+
+        Returns:
+            DataFrame with MultiIndex columns: (anf_type, cf)
+            Shape: (time_samples, num_cf * num_anf_types)
+            Each column represents one (anf_type, CF) combination
+
+        """
+        rates = run_zilany2014_rate(
+            tone,
+            self.config.peripheral_fs,
+            **self.config.get_cochlea_kwargs(include_anf_num=False)
+        )
+
+        # rates is a DataFrame with MultiIndex columns: (anf_type, cf)
+        # To get mean rates: rates.mean(axis=0) returns Series with MultiIndex
+
+        return rates
+
 
     # ============ Pipeline Step 2: Convert Format ==============
 
@@ -309,7 +360,9 @@ class CochleaProcessor:
                      identifier: str = "sound",
                         metadata: dict = None):
         """
-        Docstring for process_wavfile
+        Process a wav file through the zilany2014 rate function (analytical estimation)
+
+        Return mean firing rates ( averaged over time ) per CF and fiber type.
 
         :param self: Description
         :param sound: Description
@@ -322,10 +375,8 @@ class CochleaProcessor:
         Returns:
             dict: Results containing:
             - mean_rates: Dict[fiber_type, array(num_cf)]
-            - psth: Dict[fiber_type, array(num_cf, n_bins)]
             - cf_list: Array of CFs
             - duration: Sound duration
-            - time_axis: Time axis for PSTH
             - identifier: Sound identifier
             - metadata: Any provided metadata
 
@@ -333,27 +384,37 @@ class CochleaProcessor:
         logger.info(f"Processing sound: {identifier}")
 
         try:
-            trains = self._run_cochlea_model(sound)
-            spike_array, cf_list, duration = self._convert_to_array(trains)
-            mean_rates, psth = self._aggregate_by_fiber_type(
-                trains, spike_array, cf_list, duration
-                )
+            # Get instantaneous rates (returns DataFrame with MultiIndex columns)
+            rates_df = self._run_cochlea_rate_model(sound)
+            # rates_df columns: MultiIndex[(anf_type, cf), ...]
+            # rates_df.shape = (time_samples, num_cf * num_anf_types)
+
+            # Calculate mean rate over time for each channel
+            mean_rates_df = rates_df.mean(axis=0)  # Series with MultiIndex
+
+            # Calculate duration from sound array
+            duration = len(sound) / self.config.peripheral_fs
+
+            # Organize by fiber type
+            mean_rates_dict = {}
+            for fiber_type in self.config.anf_types:
+                # Extract all CFs for this fiber type
+                # MultiIndex selection: (anf_type, cf)
+                fiber_rates = mean_rates_df.xs(fiber_type, level='anf_type')
+                # Sort by CF to ensure correct order
+                fiber_rates = fiber_rates.sort_index()
+                mean_rates_dict[fiber_type] = fiber_rates.values
 
             result = {
                 'soundfileid': identifier,
-                'mean_rates': mean_rates,
-                'psth': psth,
-                'cf_list': cf_list,
+                'mean_rates': mean_rates_dict if self.config.save_mean_rates else None,
+                'cf_list': self._cf_list, # Use cached CF list from cochlea
                 'duration': duration,
-                'time_axis': self._time_axis,
                 }
 
             # Include any provided metadata
             if metadata:
                 result['metadata'] = metadata
-
-            # Memory cleanup
-            del trains, spike_array
 
             return result
 
@@ -361,10 +422,89 @@ class CochleaProcessor:
             logger.error(f"Failed processing {identifier}: {e}")
             raise
 
+# ================ Shared Simulation Base CLass ================
+
+
+class _SimulationBase:
+    """
+    Shared logic for simulations using .wav files or generating stimuli.
+    NOt meant to be used directly.
+    """
+    def __init__(self, config: CochleaConfig):
+        self.config = config
+        self.processor = CochleaProcessor(config)
+        self.results = {}
+        self.save_dir = None
+        self.metadata_saver = None
+        self.result_saver = None
+
+    def _setup_logging_and_savers(self):
+        """ Setup logging and saver instances. """
+        level_map = {
+            'DEBUG': logging.DEBUG,
+            'INFO': logging.INFO,
+            'WARNING': logging.WARNING,
+            'ERROR': logging.ERROR,
+            'CRITICAL': logging.CRITICAL
+        }
+
+        format_map = {
+            'DEFAULT': '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+            'SIMPLE': '%(levelname)s: %(message)s',
+            'DETAILED': '%(asctime)s - %(name)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s'
+            }
+
+        logfile_config = LoggingConfigurator(
+            output_dir=self.save_dir,
+            log_filename=self.config.log_filename,
+            file_level=level_map.get(self.config.log_file_level, logging.INFO),
+            console_level=level_map.get(self.config.log_console_level, logging.INFO),
+            format_string=format_map.get(self.config.log_format, format_map['DEFAULT'])
+        )
+        logfile_config.setup()
+        logger.info(f"Logging configured: {self.save_dir / self.config.log_filename}")
+
+        self.metadata_saver = MetadataSaver()
+        self.result_saver = ResultSaver(self.save_dir)
+
+    def _save_metadata(self, data:dict, base_filename: str):
+        """Save metadata. """
+        if self.config.metadata_format == 'json':
+            self.metadata_saver.save_json(self.save_dir, data, f"{base_filename}.json")
+        elif self.config.metadata_format == 'yaml':
+            self.metadata_saver.save_yaml(self.save_dir, data, f"{base_filename}.yaml")
+        else:
+            self.metadata_saver.save_text(self.save_dir, data, f"{base_filename}.txt")
+
+    def _save_single_result(self, data: dict, filename_base: str):
+        """Save individual result file (shared code)."""
+
+        if 'npz' in self.config.save_formats:
+            self.result_saver.save_npz(data, f"{filename_base}.npz")
+        if 'pkl' in self.config.save_formats:
+            self.result_saver.save_pickle(data, f"{filename_base}.pkl")
+        if 'mat' in self.config.save_formats:
+            self.result_saver.save_mat(data, f"{filename_base}.mat")
+
+    def _save_runtime_info(self, elapsed_time: float, stim_count: int):
+        """Save runtime info (shared code)."""
+        minutes = int(elapsed_time // 60)
+        seconds = elapsed_time % 60
+        hours = int(minutes // 60)
+        minutes = int(minutes % 60)
+        time_formatted = f"{hours}h {minutes}m {seconds:.2f}s" if hours > 0 else f"{minutes}m {seconds:.2f}s"
+
+        runtime_metadata = {
+            'elapsed_time_seconds': round(elapsed_time, 2),
+            'elapsed_time_formatted': time_formatted,
+            'num_stimuli_processed': stim_count,
+            'total_results': len(self.results),
+        }
+        self._save_metadata(runtime_metadata, 'runtime_info')
 
 # ================= Simulation Orchestrator (Uses Utils) ================
 
-class CochleaSimulation:
+class CochleaSimulation(_SimulationBase):
     """
     Docstring for CochleaSimulation
     """
@@ -374,15 +514,9 @@ class CochleaSimulation:
             config: CochleaConfig,
             ):
 
-        self.config = config
+        super().__init__(config)
         self.name_builder = self._custom_folder_name_builder
         self.sound_gen = SoundGen(config.sample_rate, config.tau_ramp)
-        self.processor = CochleaProcessor(config)
-        self.results = {}
-        self.save_dir = None
-        self.metadata_saver = None
-        self.result_saver = None
-
         logger.info("Initialized CochleaSimulation")
 
     def _custom_folder_name_builder(self, params, timestamp):
@@ -414,39 +548,13 @@ class CochleaSimulation:
         self.save_dir = Path(folder_manager.create_folder(save_text=False))
         logger.info(f"Created output directory: {self.save_dir}")
 
-        # Setup logging to file using LoggingConfigurator with config params
-        # Map string levels to logging constants
-        level_map = {
-            'DEBUG': logging.DEBUG,
-            'INFO': logging.INFO,
-            'WARNING': logging.WARNING,
-            'ERROR': logging.ERROR,
-            'CRITICAL': logging.CRITICAL
-        }
+        # Use base class method for logging setup
+        self._setup_logging_and_savers()
 
-        # Map format names to actual format strings
-        format_map = {
-            'DEFAULT': '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-            'SIMPLE': '%(levelname)s: %(message)s',
-            'DETAILED': '%(asctime)s - %(name)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s'
-        }
-
-        logfile_config = LoggingConfigurator(
-            output_dir=self.save_dir,
-            log_filename=self.config.log_filename,
-            file_level=level_map.get(self.config.log_file_level, logging.INFO),
-            console_level=level_map.get(self.config.log_console_level, logging.INFO),
-            format_string=format_map.get(self.config.log_format, format_map['DEFAULT'])
-        )
-        logfile = logfile_config.setup()
-        logger.info(f"Logging configured. Logs saved to: {self.save_dir / self.config.log_filename}")
-
-        # Initialize MetadataSaver
-        self.metadata_saver = MetadataSaver() # Metadatasaver takes no arguments
 
         # Save configuration metadata
         config_metadata = {
-            'name_builder': self.name_builder,
+            'processing_type': 'tone_generation',
             'peripheral_fs': self.config.peripheral_fs,
             'min_cf': self.config.min_cf,
             'max_cf': self.config.max_cf,
@@ -469,24 +577,13 @@ class CochleaSimulation:
         self._save_metadata(config_metadata, 'simulation_config')
         logger.info("Saved cochlea simulation configuration metadata")
 
-        #Initialize ResultSaver
-        self.result_saver = ResultSaver(self.save_dir)
-
-    def _save_metadata(self, data: dict, base_filename: str):
-        """Save metadata in configured format using if/elif."""
-        if self.config.metadata_format == 'json':
-            self.metadata_saver.save_json(self.save_dir, data, f"{base_filename}.json")
-        elif self.config.metadata_format == 'yaml':
-            self.metadata_saver.save_yaml(self.save_dir, data, f"{base_filename}.yaml")
-        else:  # Default to txt
-            self.metadata_saver.save_text(self.save_dir, data, f"{base_filename}.txt")
 
     def run(self) -> Dict:
         """
         Run cochlea simulation pipeline.
 
         Returns:
-            Dictionary of results organized by stimulus and fiber type
+            Dictionary of lightweight result references (not full data)
         """
         logger.info("=" * 60)
         logger.info("Starting Cochlea Simulation")
@@ -514,177 +611,175 @@ class CochleaSimulation:
         for result in self.processor.process(tone_generator):
             stim_count += 1
 
-            # Store aggregated results per fiber type
-            for fiber_type in self.config.anf_types:
-                key = f"freq_{result['freq']:.1f}hz_db_{result['db']}_{fiber_type}"
+            freq = result['freq']
+            db = result['db']
+            stim_id = f"freq_{freq:.1f}hz_db_{db}"
 
-                self.results[key] = {
-                    'freq': result['freq'],
-                    'db': result['db'],
-                    'fiber_type': fiber_type,
-                    'cf_list': result['cf_list'],
-                    'mean_rate': result['mean_rates'][fiber_type] if self.config.save_mean_rates else None,
-                    'psth': result['psth'][fiber_type] if self.config.save_psth else None,
-                    'duration': result['duration'],
-                    'time_axis': result['time_axis'] if self.config.save_psth else None
-                    }
 
-            logger.info(f"Completed stimulus {stim_count}: {result['freq']:.1f} Hz @ {result['db']} dB")
 
-        # Save results using ResultSaver
-        logger.info("Saving results...")
-        self._save_results()
+            stim_data = {
+                'freq': freq,
+                'db': db,
+                'cf_list': result['cf_list'],
+                'duration': result['duration'],
+                'time_axis': result['time_axis'] if self.config.save_psth else None,
+                'mean_rates': result['mean_rates'] if self.config.save_mean_rates else None,
+                'psth': result['psth'] if self.config.save_psth else None,
+            }
 
-        # Calculate and log runtime
+            # Save immediately (one file per fiber type per stimulus)
+            filename = f"{self.config.experiment_name}_{stim_id}"
+            self._save_single_result(stim_data, filename)
+
+            # Store lightweight reference only (no large arrays)
+            self.results[stim_id] = {
+                'freq': freq,
+                'db': db,
+                'saved_to': filename,
+                'cf_list': result['cf_list']
+                }
+
+
+            # CRITICAL: Delete result after all fiber types are saved
+            del result, stim_data
+            gc.collect()
+
+            logger.info(f"Completed stimulus {stim_count}: {freq:.1f} Hz @ {db} dB (saved & cleared from RAM)")
+
+        # Save runtime info using base class method
         elapsed_time = time.time() - start_time
+        self._save_runtime_info(elapsed_time, stim_count)
+
+        # Log completion
         logger.info(f"Simulation completed in {elapsed_time:.2f} seconds")
         logger.info(f"Processed {stim_count} stimuli")
         logger.info(f"Results saved to: {self.save_dir}")
         logger.info("=" * 60)
 
-        # Save runtime metadata with time conversion
-        minutes = int(elapsed_time // 60)
-        seconds = elapsed_time % 60
-        hours = int(minutes // 60)
-        minutes = int(minutes % 60)
+        return self.results
 
-        time_formatted = f"{hours}h {minutes}m {seconds:.2f}s" if hours > 0 else f"{minutes}m {seconds:.2f}s"
 
-        runtime_metadata = {
-            'elapsed_time_seconds': round(elapsed_time, 2),
-            'elapsed_time_formatted': time_formatted,
-            'num_stimuli_processed': stim_count,
-            'num_tones': len(set(data['freq'] for data in self.results.values())),
-            'num_db_levels': len(set(data['db'] for data in self.results.values())),
-            'num_fiber_types': len(self.config.anf_types),
-            'total_results': len(self.results),
-            'save_psth': self.config.save_psth,
-            'save_mean_rates': self.config.save_mean_rates,
-            'save_formats': self.config.save_formats,
-            'output_directory': str(self.save_dir)
+
+# ================= CochleaWavSimulation
+
+
+class CochleaWavSimulation(_SimulationBase):
+    """
+    Docstring for CochleaWavSimulation
+    """
+
+    def __init__(self, config: CochleaConfig, wav_files: list, metadata_dict: dict = None):
+        super().__init__(config)
+        self.wav_files = wav_files
+        self.metadata_dict = metadata_dict or {}
+        logger.info(f"Initialized WavSimulation with {len(wav_files)} files")
+
+    def setup_output_folder(self):
+        """Setup output folder - delegates logging to base class."""
+        # Create simple folder for WAV files
+        timestamp_gen = TimestampGenerator()
+        timestamp = timestamp_gen.generate_timestamp()
+        lsr, msr, hsr = self.config.num_ANF
+        folder_name = f"wav_{self.config.num_cf}cf_{lsr}-{msr}-{hsr}anf_{len(self.wav_files)}files_{timestamp}"
+
+        self.save_dir = Path(self.config.output_dir) / folder_name
+        self.save_dir.mkdir(parents=True, exist_ok=True)
+        logger.info(f"Created output directory: {self.save_dir}")
+
+        # Use base class method for logging setup
+        self._setup_logging_and_savers()
+
+        # Save configuration metadata (specific to WAV processing)
+        config_metadata = {
+            'processing_type': 'wav_files',
+            'num_files': len(self.wav_files),
+            'files': [p.name for p in self.wav_files],
+            'peripheral_fs': self.config.peripheral_fs,
+            'num_cf': self.config.num_cf,
+            'num_ANF': self.config.num_ANF,
+            'anf_types': self.config.anf_types,
+            'species': self.config.species,
+            'cohc': self.config.cohc,
+            'cihc': self.config.cihc,
+        }
+        self._save_metadata(config_metadata, 'simulation_config')
+        logger.info("Saved configuration metadata")
+
+    def run(self) -> Dict:
+        """Process all WAV files."""
+        logger.info("=" * 60)
+        logger.info("Starting WAV File Processing")
+        logger.info("=" * 60)
+
+        start_time = time.time()
+
+        if self.save_dir is None:
+            self.setup_output_folder()
+
+        stim_count = 0
+
+        for wav_path in self.wav_files:
+            identifier = wav_path.stem
+            logger.info(f"Processing: {wav_path.name}")
+
+            # Load and resample
+            audio, fs = sf.read(wav_path)
+            if fs != self.config.peripheral_fs:
+                logger.info(f"Resampling from {fs} Hz to {self.config.peripheral_fs} Hz")
+                audio = wv.resample(audio, fs, self.config.peripheral_fs)
+
+            # Get metadata
+            metadata = self.metadata_dict.get(identifier, {})
+
+            # Process using process_wavfile
+            result = self.processor.process_wavfile(audio, identifier, metadata)
+
+            # Organize results
+            result_data = {
+                'soundfileid': identifier,
+                'cf_list': result['cf_list'],
+                'duration': result['duration'],
+                'fiber_types': list(self.config.anf_types),
+                'metadata': metadata,
             }
-        self._save_metadata(runtime_metadata, 'runtime_info')
+
+            if self.config.save_mean_rates:
+                result_data['mean_rates'] = result['mean_rates']
+
+            # Note: process_wavfile uses rate model which doesn't produce PSTH
+            # time_axis and psth are not available for rate-based processing
+
+            filename = f"{self.config.experiment_name}_{identifier}"
+            # Save immediately (use base class method)
+            self._save_single_result(result_data, filename)
+
+            # Store lightweight reference only (not full data)
+            # This allows iteration but doesn't consume RAM
+            self.results[identifier] = {
+                'soundfileid': identifier,
+                'saved_to': filename,
+                'cf_list': result_data['cf_list'],  # Small array, OK to keep
+            }
+
+            # CRITICAL: Delete large data immediately after saving
+            del result, result_data
+            import gc
+            gc.collect()
+
+            stim_count += 1
+            logger.info(f"Completed: {identifier} (data saved & cleared from RAM)")
+
+        # Save runtime info (use base class method)
+        elapsed_time = time.time() - start_time
+        self._save_runtime_info(elapsed_time, stim_count)
+
+        logger.info(f"Processing completed in {elapsed_time:.2f} seconds")
+        logger.info(f"Processed {stim_count} stimuli")
+        logger.info(f"Results saved to: {self.save_dir}")
+        logger.info("=" * 60)
 
         return self.results
 
-    def _save_results(self):
-        """Save results using ResultSaver, organized by stimulus."""
-        # Organize results by stimulus (freq, db)
-        stim_results = {}
-
-        # Get CF list from first result (same for all stimuli)
-        first_key = list(self.results.keys())[0]
-        cf_list = self.results[first_key]['cf_list']
-
-        # Populate data organized by stimulus
-        for key, data in self.results.items():
-            # Extract stimulus and fiber type info
-            parts = key.rsplit('_', 1)
-            fiber_type = parts[1]  # e.g., "hsr"
-
-            freq = data['freq']
-            db = data['db']
-            stim_id = f"freq_{freq:.1f}hz_db_{db}"
-
-            # Initialize stimulus entry if needed
-            if stim_id not in stim_results:
-                stim_results[stim_id] = {
-                    'freq': freq,
-                    'db': db,
-                    'cf_list': data['cf_list'],
-                    'duration': data['duration'],
-                    'time_axis': data['time_axis'] if self.config.save_psth else None,
-                    'fiber_types': list(self.config.anf_types),
-                    'mean_rates': {} if self.config.save_mean_rates else None,
-                    'psth': {} if self.config.save_psth else None
-                }
-
-            # Add this fiber type's data for all CFs
-            if self.config.save_mean_rates:
-                stim_results[stim_id]['mean_rates'][fiber_type] = data['mean_rate']
-            if self.config.save_psth:
-                stim_results[stim_id]['psth'][fiber_type] = data['psth']
-
-        # Save using ResultSaver - one file per stimulus
-        for stim_id, stim_data in stim_results.items():
-            filename = f"{self.config.experiment_name}_{stim_id}"
-
-            # Save in configured formats only
-            if 'pkl' in self.config.save_formats:
-                self.result_saver.save_pickle(stim_data, f"{filename}.pkl")
-            if 'mat' in self.config.save_formats:
-                self.result_saver.save_mat(stim_data, f"{filename}.mat")
-            if 'npz' in self.config.save_formats:
-                self.result_saver.save_npz(stim_data, f"{filename}.npz")
-
-            logger.debug(f"Saved {stim_id}")
-
-        logger.info(f"Saved {len(stim_results)} stimulus response files")
-
-        # Save consolidated results (mean rates only)
-        self._save_consolidated_results(stim_results)
-
-    def _save_consolidated_results(self, stim_results: dict):
-        """Save consolidated mean rates across all stimuli in a single file.
-
-        Creates arrays organized by fiber type with shape (num_freq, num_db, num_cf).
-        Only includes mean rates, not PSTHs, for memory efficiency.
-
-        Args:
-            stim_results: Dictionary of results organized by stimulus
-        """
-        if not self.config.save_mean_rates:
-            logger.info("Skipping consolidated results (save_mean_rates=False)")
-            return
-
-        # Extract metadata
-        first_stim = list(stim_results.values())[0]
-        cf_list = first_stim['cf_list']
-        fiber_types = first_stim['fiber_types']
-
-        # Extract unique frequencies and db levels
-        frequencies = sorted(set(s['freq'] for s in stim_results.values()))
-        db_levels = sorted(set(s['db'] for s in stim_results.values()))
-
-        # Initialize arrays: (num_freq, num_db, num_cf) per fiber type
-        num_freq = len(frequencies)
-        num_db = len(db_levels)
-        num_cf = len(cf_list)
-
-        consolidated_data = {
-            'cf_list': cf_list,
-            'frequencies': np.array(frequencies),
-            'db_levels': np.array(db_levels),
-            'fiber_types': fiber_types
-        }
-
-        # Organize mean rates by fiber type (flatten to avoid nested dict)
-        for fiber_type in fiber_types:
-            mean_rate_array = np.zeros((num_freq, num_db, num_cf))
-
-            for stim_id, stim_data in stim_results.items():
-                freq = stim_data['freq']
-                db = stim_data['db']
-
-                freq_idx = frequencies.index(freq)
-                db_idx = db_levels.index(db)
-
-                mean_rate_array[freq_idx, db_idx, :] = stim_data['mean_rates'][fiber_type]
-
-            # Store as top-level key to avoid .item() unwrapping
-            consolidated_data[f'mean_rates_{fiber_type}'] = mean_rate_array
-
-        # Save consolidated file
-        filename = f"{self.config.experiment_name}_consolidated_mean_rates"
-
-        if 'npz' in self.config.save_formats:
-            self.result_saver.save_npz(consolidated_data, f"{filename}.npz")
-        if 'pkl' in self.config.save_formats:
-            self.result_saver.save_pickle(consolidated_data, f"{filename}.pkl")
-        if 'mat' in self.config.save_formats:
-            self.result_saver.save_mat(consolidated_data, f"{filename}.mat")
-
-        logger.info(f"Saved consolidated results: {num_freq} freq × {num_db} dB × {num_cf} CF")
 
 # ================= Testing ================
 
