@@ -9,7 +9,7 @@ Contains:
 
 import os
 from .metadata_saver import MetadataSaver
-from .timestamp_generator import TimestampGenerator
+from .timestamp_utils import generate_timestamp, TimestampFormats
 from .model_builders import model_builders
 
 
@@ -66,18 +66,19 @@ class FolderManager(object):
         self.params = {}
         self.name_builder = name_builder
         self.results_folder = None
+        self.timestamp_format = TimestampFormats.COMPACT
 
         # Composition: inject dependencies
         self.folder_creator = FolderCreator(base_dir)
         self.metadata_saver = MetadataSaver()
-        self.timestamp_generator = TimestampGenerator()
+
 
     def with_params(self, **kwargs):
         self.params.update(kwargs)
         return self
 
     def with_timestamp_format(self, format_string):
-        self.timestamp_generator = TimestampGenerator(format_string)
+        self.timestamp_format = format_string
         return self
 
     def create_folder(self, folder_name=None, save_json=True, save_text=True):
@@ -92,7 +93,7 @@ class FolderManager(object):
         """
 
         # 1. Generate timestamp
-        timestamp = self.timestamp_generator.generate_timestamp()
+        timestamp = generate_timestamp(self.timestamp_format)
 
         # 2. Build folder name
         if folder_name is None:
