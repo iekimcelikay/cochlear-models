@@ -69,7 +69,7 @@ from .model_builders import model_builders
 
 from .metadata_saver import MetadataSaver
 from .result_saver import ResultSaver, save_results
-from .timestamp_generator import TimestampGenerator, TimestampFormats
+from .timestamp_utils import generate_timestamp, TimestampFormats
 
 # Define the public API
 __all__ = [
@@ -86,6 +86,6 @@ __all__ = [
     "MetadataSaver",
     "ResultSaver",
     "save_results",
-    "TimestampGenerator",
+    "generate_timestamp",
     "TimestampFormats"
 ]
