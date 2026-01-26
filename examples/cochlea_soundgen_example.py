@@ -9,11 +9,11 @@ from peripheral_models.cochlea_simulation import ToneConfig, CochleaSimulation
 if __name__ == '__main__':
     # Model configuration (stimulus-agnostic)
     model_config = CochleaConfig(
-        num_cf=10,
-        num_ANF=(12,12,12),
+        num_cf=40,
+        num_ANF=(128,128,128),
         powerlaw= 'approximate',
-        output_dir="./models_output/cochlea_test014_approximate",
-        experiment_name="test014",    # Prefix for all output files
+        output_dir="./models_output/cochlea_test015_approximate",
+        experiment_name="test015",    # Prefix for all output files
 
         # Output format control
         save_formats=['npz'],         # Only save NPZ files
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     # Tone stimulus configuration
     tone_config = ToneConfig(
         db_range=[60],
-        freq_range=(125, 2500, 10),
+        freq_range=(125, 2500, 40),
         tone_duration=0.200,
         num_harmonics=1,
         harmonic_factor=0.5,
