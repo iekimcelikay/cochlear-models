@@ -85,7 +85,7 @@ def generate_stimuli_params(freq_range, db_range):
 
     Args:
         freq_range: Tuple of (min_freq, max_freq, num_freqs) for frequency range
-        db_range: Either a tuple (min_db, max_db, step) for range, or a single number for one dB level
+        db_range: Either a list [db1, db2, ...], a tuple (min_db, max_db, step) for range, or a single number
 
     Returns:
         desired_dbs: Array of dB levels
@@ -93,6 +93,8 @@ def generate_stimuli_params(freq_range, db_range):
     """
     if np.isscalar(db_range):
         desired_dbs = np.array([db_range])
+    elif isinstance(db_range, list):
+        desired_dbs = np.array(db_range)
     else:
         desired_dbs = np.arange(*db_range)
 

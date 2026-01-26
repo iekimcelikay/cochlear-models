@@ -36,3 +36,32 @@ phd_firstyear.code-workspace
 .idea/modules.xml
 *.ai-conventions
 *.cursorrules
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Outputs
+outputs/
+models_output/
+*.npz
+*.mat
+*.pkl
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

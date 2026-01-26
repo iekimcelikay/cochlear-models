@@ -16,7 +16,7 @@ from cochlea.zilany2014 import run_zilany2014_rate
 import thorns as th
 import thorns.waves as wv
 
-from cochlea_simulation import CochleaConfig
+from peripheral_models.cochlea_config import CochleaConfig
 
 
 logger = logging.getLogger(__name__)
