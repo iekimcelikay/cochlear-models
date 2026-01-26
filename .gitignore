@@ -3,7 +3,7 @@
 /soch.py
 *.sublime-workspace
 *.sublime-project
-*.wav
+
 /vcs.xml
 /workspace.xml
 *.xml
