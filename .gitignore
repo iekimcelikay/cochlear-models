@@ -65,3 +65,6 @@ models_output/
 # OS
 .DS_Store
 Thumbs.db
+
+.ai-conventions
+.cursorrules
