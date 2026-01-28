@@ -50,7 +50,7 @@ from utils.calculate_population_rate import calculate_population_rate
 
 from peripheral_models.cochlea_config import CochleaConfig
 from peripheral_models.tone_config import ToneConfig
-from peripheral_models.cochlea_processor import CochleaProcessor, calculate_population_rate
+from peripheral_models.cochlea_processor import CochleaProcessor
 
 # ================ Shared Simulation Base CLass ================
 

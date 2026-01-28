@@ -22,12 +22,18 @@
 # Power-law (n>1) enhances contrast by expanding the dynamic range.
 # r_powered = r^n, where n>1
 # Then you need to re-normalize:
-# r_normalized = r_powered / (σ + Σ_j w_ij * r_j^n) (divide by pooled activity)
+#
 # or sometimes:
 # r_normalized = r_powered / (σ + (Σ_j w_ij * r_j^n)^(1/n))
 # Power function: Enhances strong responses, suppresses weak ones
-# Normalization: Divides by the pooled activity of neighbors, creating gain control
+# Apply divisive normalization if you want to model lateral inhibition (28.01)
+# Divisive Normalization: Divides by the pooled activity of neighbors, creating gain control
 # Net effect: Strong lateral inhibition - responses are suppressed based on overall population activity
+# 28/01/26:
+# - adding the power functions.
+# - the plotting notebook: 'powerlaw_visualization.ipynb'
+# - loaders moved to its own script in utils 'cochlea_loader_functions.py'.
+
 
 
 
@@ -40,348 +46,235 @@ import logging
 from pathlib import Path
 
 # Project imports
-from utils.misc_functions import find_latest_results_folder
-from utils.result_saver import ResultSaver
+from utils.cochlea_loader_functions import load_cochlea_results, organize_for_eachtone_allCFs
 
-# Define paths
-# Add parent directory to path
-sys.path.insert(0, str(Path.cwd().parent))
-
-input_dir = "./models_output/cochlea_test015_approximate"
-
-AN_firingrates_dir = find_latest_results_folder(input_dir)
-
-# Load one file here
-results_folder = AN_firingrates_dir
-
-saver = ResultSaver(results_folder)
-
-# Find all .npz files
-npz_files = list(results_folder.glob('*.npz'))
-print(f"Found {len(npz_files)} .npz files")
-
-results = {}
-
-for npz_file in npz_files:
-    # Parse filename to extract freq and db
-    # Format: test011_freq_125.0hz_db_60.npz
-    parts = npz_file.stem.split('_')
-    freq_idx = parts.index('freq') + 1
-    db_idx = parts.index('db') + 1
-
-    freq = float(parts[freq_idx].replace('hz', ''))
-    db = float(parts[db_idx])
-
-    # Load data
-    data = saver.load_npz(npz_file.name)
-
-    # Store with freq as key
-    if freq not in results:
-        results[freq] = {}
-    results[freq][db] = data
-
-    print(f"Loaded {len(results)} frequencies")
-
-    first_freq = list(results.keys())[0]
-    first_db = list(results[first_freq].keys())[0]
-    cf_list = results[first_freq][first_db]['cf_list']
-    mean_rates = results[first_freq][first_db]['mean_rates']
-
-    population_results = {}
-    hsr_weight = 0.65
-    msr_weight = 0.28
-    lsr_weight = 0.12
-
-
-    for freq, db_dict in results.items():
-        population_results[freq] = {}
-
-        for db, data in db_dict.items():
-            # Extract mean rates (it's a dictionary wrapped in numpy array)
-            mean_rates = data['mean_rates'].item()
-
-            # Get individual fiber types
-
-            mean_rates_hsr = mean_rates['hsr']
-            mean_rates_msr = mean_rates['msr']
-            mean_rates_lsr = mean_rates['lsr']
-
-            # Compute population response
-            population_mean = (hsr_weight * mean_rates_hsr +
-                                msr_weight * mean_rates_msr +
-                                lsr_weight * mean_rates_lsr
-                                )
-
-            population_results[freq][db] = population_mean
-
-
-###
 
 # ================= Function drafts ====================
 
-def load_cochlea_results(input_dir, weights=None):
-    """Load cochlea simulation results and compute population responses.
-    Usage:
 
-    results, population_results, cf_list = load_cochlea_results(input_dir)
+
+def apply_power_function(response_matrix, exponent):
+    return np.power(response_matrix, exponent)
+
+def apply_multiple_power_functions(response_matrix, exponents):
+    results = {'original': response_matrix.copy()}
+    for exp in exponents:
+        results[exp] = apply_power_function(response_matrix, exp)
+    return results
+
+def apply_power_with_percf_normalization(response_matrix, exponent):
+    r_powered= apply_power_function(response_matrix, exponent)
+    # Normalize each CF (each row) to its own max
+    max_per_cf = np.max(r_powered, axis=1, keepdims=True)
+    r_normalized = r_powered / (max_per_cf + 1e-10)
+    return r_normalized
+
+def apply_multiple_power_with_percf_normalization(response_matrix, exponents):
+    results = {'original': response_matrix.copy()}
+    results['original'] = apply_power_with_percf_normalization(results['original'], 1.0)
+    for exp in exponents:
+        results[exp] = apply_power_with_percf_normalization(response_matrix, exp)
+    return results
+
+def plot_single_cf_single_exponent(response_matrix, tone_freqs, cf_list, cf_idx, exponent, figsize=(10, 6)):
+    """Plot tuning curve for a single CF with a single power exponent.
 
     Args:
-        input_dir: Path to directory containing cochlea results
-        weights: Dict with 'hsr', 'msr', 'lsr' weights. If None, uses defaults.
-
-    Returns:
-        results: Dict[freq][db] -> raw data from .npz files
-        population_results: Dict[freq][db] -> population mean rates array (num_cf,)
+        response_matrix: Original response matrix (num_cf, num_tones)
+        tone_freqs: Array of tone frequencies
         cf_list: Array of CF values
-    """
-    # Default weights
-    if weights is None:
-        weights = {
-            'hsr': 0.65,
-            'msr': 0.28,
-            'lsr': 0.12
-        }
-
-    # Find latest results folder
-    AN_firingrates_dir = find_latest_results_folder(input_dir)
-    results_folder = AN_firingrates_dir
-    saver = ResultSaver(results_folder)
-
-    # Find all .npz files
-    npz_files = list(results_folder.glob('*.npz'))
-    print(f"Found {len(npz_files)} .npz files")
-
-    results = {}
-
-    # Load all data files
-    for npz_file in npz_files:
-        # Parse filename to extract freq and db
-        # Format: test011_freq_125.0hz_db_60.npz
-        parts = npz_file.stem.split('_')
-        freq_idx = parts.index('freq') + 1
-        db_idx = parts.index('db') + 1
-
-        freq = float(parts[freq_idx].replace('hz', ''))
-        db = float(parts[db_idx])
-
-        # Load data
-        data = saver.load_npz(npz_file.name)
-
-        # Store with freq as key
-        if freq not in results:
-            results[freq] = {}
-        results[freq][db] = data
-
-    print(f"Loaded {len(results)} frequencies")
-
-    # Extract CF list from first file
-    first_freq = list(results.keys())[0]
-    first_db = list(results[first_freq].keys())[0]
-    cf_list = results[first_freq][first_db]['cf_list']
-
-    # Compute population responses
-    population_results = {}
-
-    for freq, db_dict in results.items():
-        population_results[freq] = {}
-
-        for db, data in db_dict.items():
-            # Extract mean rates (it's a dictionary wrapped in numpy array)
-            mean_rates = data['mean_rates'].item()
-
-            # Get individual fiber types
-            mean_rates_hsr = mean_rates['hsr']
-            mean_rates_msr = mean_rates['msr']
-            mean_rates_lsr = mean_rates['lsr']
-
-            # Compute weighted population response
-            population_mean = (weights['hsr'] * mean_rates_hsr +
-                             weights['msr'] * mean_rates_msr +
-                             weights['lsr'] * mean_rates_lsr)
-
-            population_results[freq][db] = population_mean
-
-    return results, population_results, cf_list
-
-def organize_for_eachtone_allCFs(population_results, cf_list, target_db):
-    """Organize population results into a 2D spectrogram matrix for a specific dB level.
-
-    Args:
-        population_results: Dict[freq][db] -> array of firing rates (num_cf,)
-        cf_list: Array of CF values (num_cf,)
-        target_db: dB level to extract
-
-    Returns:
-        response_matrix: 2D array of shape (num_cf, num_tones)
-                        Rows = CF channels, Columns = tone frequencies
-        tone_freqs: Sorted array of tone frequencies used as stimuli
-    """
-    # Get all tone frequencies that have the target dB level
-    tone_freqs = []
-    for freq, db_dict in population_results.items():
-        if target_db in db_dict:
-            tone_freqs.append(freq)
-
-    # Sort tone frequencies
-    tone_freqs = np.array(sorted(tone_freqs))
-
-    # Initialize response matrix: (num_cf, num_tones)
-    num_cf = len(cf_list)
-    num_tones = len(tone_freqs)
-    response_matrix = np.zeros((num_cf, num_tones))
-
-    # Fill the matrix
-    for i_tone, freq in enumerate(tone_freqs):
-        response_matrix[:, i_tone] = population_results[freq][target_db]
-
-    print(f"Organized matrix shape: {response_matrix.shape}")
-    print(f"  - {num_cf} CF channels")
-    print(f"  - {num_tones} tone frequencies")
-    print(f"  - dB level: {target_db}")
-
-    return response_matrix, tone_freqs
-
-def plot_spectrogram_forCFS(cf_list, tone_freqs, response_matrix, db_level, save_path=None):
-    """Plot spectrogram showing CF responses to different tone frequencies.
-
-    Args:
-        cf_list: Array of CF values (Hz)
-        tone_freqs: Array of tone frequencies (Hz)
-        response_matrix: 2D array of shape (num_cf, num_tones) with firing rates
-        db_level: dB level of stimuli (for title)
-        save_path: Optional path to save figure
+        cf_idx: Index of CF to plot
+        exponent: Power exponent to apply
+        figsize: Figure size tuple
 
     Returns:
         fig, ax: Matplotlib figure and axis objects
     """
-    fig, ax = plt.subplots(figsize=(14, 8))
+    transformed_response = apply_power_with_percf_normalization(response_matrix, exponent)
 
-    # Transpose matrix to have CFs on x-axis
-    # Original: (num_cf, num_tones), Transposed: (num_tones, num_cf)
-    response_matrix_T = response_matrix.T
-
-    # Create heatmap with CFs on x-axis
-    im = ax.imshow(response_matrix_T,
-                   aspect='auto',
-                   origin='lower',
-                   cmap='viridis',
-                   interpolation='nearest',
-                   extent=[cf_list[0], cf_list[-1], tone_freqs[0], tone_freqs[-1]])
-
-    # Add colorbar
-    cbar = plt.colorbar(im, ax=ax, label='Firing Rate (spikes/s)')
-
-    # Labels and title
-    ax.set_xlabel('CF (Hz)', fontsize=12)
-    ax.set_ylabel('Tone Frequency (Hz)', fontsize=12)
-    ax.set_title(f'Cochlear Spectrogram - Population Response at {db_level} dB SPL',
-                 fontsize=14, fontweight='bold')
-
-    # Set log scale for better visualization
+    fig, ax = plt.subplots(figsize=figsize)
+    tuning_curve = transformed_response[cf_idx, :]
+    ax.plot(tone_freqs, tuning_curve, label=f'exp={exponent}')
     ax.set_xscale('log')
-    ax.set_yscale('log')
-
-    # Set ticks to show all values
-    ax.set_xticks(cf_list)
-    ax.set_yticks(tone_freqs)
-
-    # Format tick labels to show actual Hz values
-    from matplotlib.ticker import FuncFormatter
-    def hz_formatter(x, pos):
-        if x >= 1000:
-            return f'{x/1000:.1f}k'
-        else:
-            return f'{int(x)}'
-
-    ax.xaxis.set_major_formatter(FuncFormatter(hz_formatter))
-    ax.yaxis.set_major_formatter(FuncFormatter(hz_formatter))
-
-    # Rotate x-axis labels for better readability
-    plt.setp(ax.get_xticklabels(), rotation=45, ha='right', fontsize=9)
-    plt.setp(ax.get_yticklabels(), fontsize=9)
-
-    # Grid
-    ax.grid(True, alpha=0.3, linestyle='--', linewidth=0.5)
-
-    plt.tight_layout()
-
-    if save_path:
-        plt.savefig(save_path, dpi=300, bbox_inches='tight')
-        print(f"Figure saved to: {save_path}")
+    ax.set_xlabel('Tone Frequency (Hz)')
+    ax.set_ylabel('Firing Rate (spikes/s)')
+    ax.set_title(f'Tuning Curve for CF={cf_list[cf_idx]:.0f} Hz')
+    ax.legend()
+    ax.grid(True, alpha=0.3)
 
     return fig, ax
 
-def plot_tuning_curves(cf_list, tone_freqs, response_matrix, db_level, save_path=None):
-    """Plot tuning curves for each CF channel in subplots.
+
+def plot_single_cf_multiple_exponents(response_matrix, tone_freqs, cf_list, cf_idx, exponents, figsize=(10, 6), verbose=True):
+    """Plot tuning curves for a single CF with multiple power exponents.
 
     Args:
-        cf_list: Array of CF values (Hz)
-        tone_freqs: Array of tone frequencies (Hz)
-        response_matrix: 2D array of shape (num_cf, num_tones) with firing rates
-        db_level: dB level of stimuli (for suptitle)
-        save_path: Optional path to save figure
+        response_matrix: Original response matrix (num_cf, num_tones)
+        tone_freqs: Array of tone frequencies
+        cf_list: Array of CF values
+        cf_idx: Index of CF to plot
+        exponents: List of power exponents to apply
+        figsize: Figure size tuple
+        verbose: Print debug information
+
+    Returns:
+        fig, ax: Matplotlib figure and axis objects
+    """
+    transformed_responses = apply_multiple_power_with_percf_normalization(response_matrix, exponents)
+
+    fig, ax = plt.subplots(figsize=figsize)
+
+    # Plot each curve and print info
+    for key in transformed_responses.keys():
+        curve = transformed_responses[key][cf_idx, :]
+        if verbose:
+            print(f"{key}: shape={curve.shape}, max={curve.max():.2f}")
+
+        if key == 'original':
+            ax.plot(tone_freqs, curve, 'k--', linewidth=2.5, label=key, alpha=0.7)
+        else:
+            ax.plot(tone_freqs, curve, linewidth=2, label=f'exp={key}')
+
+    ax.set_xscale('log')
+    ax.set_xlabel('Tone Frequency (Hz)')
+    ax.set_ylabel('Firing Rate (spikes/s)')
+    ax.set_title(f'CF = {cf_list[cf_idx]:.0f} Hz')
+    ax.legend()
+    ax.grid(True, alpha=0.3)
+
+    return fig, ax
+
+
+def plot_all_cfs_multiple_exponents(response_matrix, tone_freqs, cf_list, exponents, n_cols=5, verbose=True):
+    """Plot tuning curves for all CFs with multiple power exponents in a grid.
+
+    Args:
+        response_matrix: Original response matrix (num_cf, num_tones)
+        tone_freqs: Array of tone frequencies
+        cf_list: Array of CF values
+        exponents: List of power exponents to apply
+        n_cols: Number of columns in subplot grid
+        verbose: Print debug information
 
     Returns:
         fig, axes: Matplotlib figure and axes array
     """
-    num_cf = len(cf_list)
+    # TODO: Need to add a proper title
+    # TODO: AXES labels are not present in this figure.
+    # TODO: Top CFs are not visible because of the legend
+    # TODO: Where to add the normalization information?
+    transformed_responses = apply_multiple_power_with_percf_normalization(response_matrix, exponents)
 
-    # Create subplot grid (8 rows x 5 columns for 40 CFs)
-    n_rows = 8
-    n_cols = 5
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(20, 24))
+    num_cf = len(cf_list)
+    n_rows = int(np.ceil(num_cf / n_cols))
+
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(4*n_cols, 3*n_rows))
     axes = axes.flatten()
 
-    # Plot tuning curve for each CF
-    for i_cf, cf in enumerate(cf_list):
-        ax = axes[i_cf]
+    # Define colors once for exponents
+    exp_list = [k for k in transformed_responses.keys() if k != 'original']
+    exp_list = sorted(exp_list)
 
-        # Get firing rates for this CF across all tone frequencies
-        tuning_curve = response_matrix[i_cf, :]
+    if verbose:
+        print(f"Plotting exponents: {exp_list}")
 
-        # Plot tuning curve
-        ax.plot(tone_freqs, tuning_curve, 'o-', linewidth=2, markersize=4, color='steelblue')
+    colors = plt.cm.viridis(np.linspace(0, 1, len(exp_list)))
 
-        # Mark the CF on the plot
-        ax.axvline(cf, color='red', linestyle='--', alpha=0.5, linewidth=1.5, label=f'CF={cf:.0f} Hz')
+    # Loop through CFs
+    for cf_idx in range(num_cf):
+        ax = axes[cf_idx]
 
-        # Labels and formatting
+        # Plot original tuning curve in black
+        tuning_curve = transformed_responses['original'][cf_idx, :]
+        ax.plot(tone_freqs, tuning_curve, 'k--', linewidth=2, alpha=0.5, label='original')
+
+        # Plot each exponent with color
+        for idx, exp in enumerate(exp_list):
+            tuning_curve = transformed_responses[exp][cf_idx, :]
+            ax.plot(tone_freqs, tuning_curve, color=colors[idx], linewidth=1.5, label=f'{exp}')
+
         ax.set_xscale('log')
-        ax.set_xlabel('Tone Freq (Hz)', fontsize=8)
-        ax.set_ylabel('Rate (sp/s)', fontsize=8)
-        ax.set_title(f'CF = {cf:.0f} Hz', fontsize=9, fontweight='bold')
-        ax.grid(True, alpha=0.3, linestyle='--', linewidth=0.5)
-        ax.tick_params(labelsize=7)
+        ax.set_title(f'CF={cf_list[cf_idx]:.0f} Hz', fontsize=8)
+        ax.tick_params(labelsize=6)
+        ax.grid(True, alpha=0.2)
 
-        # Format x-axis tick labels
-        from matplotlib.ticker import FuncFormatter
-        def hz_formatter(x, pos):
-            if x >= 1000:
-                return f'{x/1000:.1f}k'
-            else:
-                return f'{int(x)}'
-        ax.xaxis.set_major_formatter(FuncFormatter(hz_formatter))
+    # Add one legend to the figure
+    fig.legend(['original'] + [f'exp={exp}' for exp in exp_list],
+               loc='upper center', ncol=len(exp_list)+1, fontsize=10)
 
-    # Overall title
-    fig.suptitle(f'Tuning Curves for All CF Channels at {db_level} dB SPL',
-                 fontsize=16, fontweight='bold', y=0.995)
-
-    plt.tight_layout(rect=[0, 0, 1, 0.995])
-
-    if save_path:
-        plt.savefig(save_path, dpi=300, bbox_inches='tight')
-        print(f"Figure saved to: {save_path}")
+    plt.tight_layout()
 
     return fig, axes
 
-def plot_AN_tuning_curves():
-    return
-
-def power_function_sharpening():
-    return
-
-def plot_power_sharpened_curves():
-    return
-
 
 # Testing
+# ============= USAGE =============
+
+sys.path.insert(0, str(Path.cwd().parent))
+
+input_dir =  Path(__file__).parent / "models_output" / "cochlea_test015_approximate"
+# Load your data
+results, population_results, cf_list = load_cochlea_results(input_dir)
+response_matrix, tone_freqs = organize_for_eachtone_allCFs(population_results, cf_list, target_db=60)
+
+
+# Example 1: Plot single CF with single exponent
+fig1, ax1 = plot_single_cf_single_exponent(response_matrix, tone_freqs, cf_list, cf_idx=10, exponent=1.5)
+plt.show()
+
+# Example 2: Plot single CF with multiple exponents
+exponents = [1.5, 1.8, 2.0, 2.5, 3.0]
+fig2, ax2 = plot_single_cf_multiple_exponents(response_matrix, tone_freqs, cf_list, cf_idx=10, exponents=exponents)
+plt.show()
+
+# Example 3: Plot all CFs with multiple exponents
+fig3, axes3 = plot_all_cfs_multiple_exponents(response_matrix, tone_freqs, cf_list, exponents=exponents)
+plt.show()
+
+
+
+# ============= KEY CONCEPTS =============
+
+# 1. Basic loop structure:
+#    for data in your_data:
+#        ax.plot(x, y, label=something)
+
+# 2. Extracting data:
+#    - For one CF: matrix[cf_idx, :] gives you (num_tones,)
+#    - For one tone: matrix[:, tone_idx] gives you (num_cf,)
+
+# 3. Styling:
+#    - Use lists of colors/styles and index with enumerate
+#    - Or use colormaps: plt.cm.viridis(np.linspace(0, 1, n))
+
+# 4. Legend:
+#    - Add label= parameter to each plot() call
+#    - Call ax.legend() once at the end
+
+# 5. Multiple subplots:
+#    - fig, axes = plt.subplots(rows, cols)
+#    - Loop through axes and plot different data on each
+
+def calculate_Q10(frequencies, firing_rates, CF):
+
+    # Find peak response
+    peak_response = np.max(firing_rates)
+
+    # Find resonse 10 dB below peak (= peak / sqrt(10) approximates peak / 3.16)
+    threshold_10dB = peak_response / np.sqrt(10)
+
+    # Find frequencies where response crosses this threshold
+    above_threshold = firing_rates >= threshold_10dB
+    freqs_above = frequencies[above_threshold]
+
+    if len(freqs_above) < 2:
+        return np.nan
+
+    # Bandwidth = max freq - min freq at this level
+    bandwith = freqs_above[-1] - freqs_above[0]
+
+    # Q = CF / bandwidth
+    Q10 = CF / bandwith
+    return Q10
+
+# Step 1: Calculate baseline q10db from original AN responses
