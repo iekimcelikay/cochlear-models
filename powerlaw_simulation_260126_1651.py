@@ -256,6 +256,8 @@ plt.show()
 #    - Loop through axes and plot different data on each
 
 def calculate_Q10(frequencies, firing_rates, CF):
+    # TODO: WORK ON CALCULATING Q10 FACTOR.
+
 
     # Find peak response
     peak_response = np.max(firing_rates)
