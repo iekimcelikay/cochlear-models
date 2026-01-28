@@ -23,6 +23,7 @@ from typing import Dict, List, Tuple
 from cochlea.zilany2014 import run_zilany2014
 from cochlea.zilany2014 import run_zilany2014_rate
 from cochlea.zilany2014.util import calc_cfs # noqa: E402
+import thorns.waves as wv
 
 # Add parent directories to path for imports to resolve modules
 # - project_root: parent of models/ for loggers, stim_generator
@@ -44,6 +45,7 @@ from utils.stimulus_utils import (
     generate_stimuli_params,
     generate_tone_generator)
 from utils.timestamp_utils import generate_timestamp
+from utils.calculate_population_rate import calculate_population_rate
 
 
 from peripheral_models.cochlea_config import CochleaConfig
