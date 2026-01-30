@@ -12,6 +12,7 @@ Last edit to the repo: 30/01/2026
 
 ---
 ## IMPORTANT:
+- If a file has a date in its name e.g. `280126` it means (in most cases) it is my working script. This does not entail that I won't make changes in the other scripts, but the others are more likely to be stable. The ones with the dates are the ones I'm currently working on to do some new stuff. 
 - You need to run the script in project root for the imports to work. In the future, this may be converted into a proper package. For now, it's modules. 
 - Use the cochlea package in this repo, its' Zilany2014 model codes are updated for Python 3.
 - To make thorns work in Python3, these changes might be needed:
