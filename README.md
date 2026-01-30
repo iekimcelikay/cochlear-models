@@ -1,10 +1,7 @@
-File created on: 26/01/2026
-
-- You need to run the script in project root for the imports to work.
-
+# auditory-pRF-subcortical
+contact: e.celikay@bcbl.eu / i.ekimcelikay@gmail.com
 
 Last edit to the repo: 30/01/2026
-
 - Changed the repository name from 'cochlear-models' to 'auditory-pRF-subcortical'. If you have a local copy, run this command in the directory of the repo is located in
     - `git remote set-url origin  https://github.com/iekimcelikay/auditory-pRF-subcortical` (source: [Github Docs: Creating and managing repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/renaming-a-repository)
 
@@ -13,6 +10,7 @@ https://github.com/iekimcelikay/auditory-pRF-subcortical/commits/main/
 
 ---
 ## IMPORTANT:
+- You need to run the script in project root for the imports to work. In the future, this may be converted into a proper package. For now, it's modules. 
 - Use the cochlea package in this repo, its' Zilany2014 model codes are updated for Python 3.
 - To make thorns work in Python3, these changes might be needed:
 -> replace `import imp` with `import importlib as imp`
@@ -20,39 +18,21 @@ https://github.com/iekimcelikay/auditory-pRF-subcortical/commits/main/
 
 ## Changelog
 
-### 2026-01-28: Modularization and Power-Law Analysis
+### 2026-01-30: Repository name change, creating of changelog_archive, updated README
 
-**New Files Created:**
-- `utils/calculate_population_rate.py` - Weighted population rate calculation across AN fiber types (HSR/MSR/LSR)
-- `utils/cochlea_loader_functions.py` - Reusable data loading and organization functions
-- `visualization/plot_cochlea_output.py` - Visualization utilities for cochlea output
+**Repository name changed**
+- old: `cochlear-models`
+- new: `auditory-pRF-subcortical`
+- If you have a local copy, run the command `git remote set-url origin  https://github.com/iekimcelikay/auditory-pRF-subcortical` inside the directory. (source: [Github Docs: Creating and managing repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/renaming-a-repository)
 
-**Modified Files:**
-- `powerlaw_simulation_260126_1651.py` - Added power-law transformation and visualization functions
+**Created a changelog_archive**:
+- To keep the readme file readable, a creation of changelog_archive.md that will keep the old changelog updates (current-1).
 
-**New Functionality:**
+**Notes on thorns package and python 3 added to readme**:
+> - To make thorns work in Python3, these changes might be needed:
+-> replace `import imp` with `import importlib as imp`
+-> replace `from collections` with `collections.abc
 
-*Data Processing:*
-- `calculate_population_rate()` - Compute weighted average across fiber types with configurable weights (default: 63% HSR, 25% MSR, 12% LSR). Moved to utils as its own script.
-- `load_cochlea_results()` - Load .npz simulation files and compute population responses
-- `organize_for_eachtone_allCFs()` - Create 2D response matrices (num_cf × num_tones) for analysis
+________________________________________________________________________________________________
+File created on: 26/01/26
 
-*Power-Law Transformations:*
-- `apply_power_function()` - Apply power-law nonlinearity: r^n
-- `apply_power_with_percf_normalization()` - Power transformation with per-CF normalization
-- `apply_multiple_power_with_percf_normalization()` - Batch processing for multiple exponents
-
-*Visualization:*
-- `plot_spectrogram_forCFS()` - Heatmap spectrogram of CF responses
-- `plot_tuning_curves()` - Grid of tuning curves for all CFs
-- `plot_single_cf_single_exponent()` - Single CF with one power exponent
-- `plot_single_cf_multiple_exponents()` - Compare multiple exponents for one CF
-- `plot_all_cfs_multiple_exponents()` - Grid showing all CFs with all exponents
-
-*Analysis (In Progress):*
-- `calculate_Q10()` - Q10 tuning sharpness factor (TODO)
-
-### TO-DOS:
-- Move the remaining visualization functions to their scripts (from powerlawsimulation script)
-- Update the jupyternotebook for powerlawsimulation
-- (Maybe) try implementing lateral inhibition
