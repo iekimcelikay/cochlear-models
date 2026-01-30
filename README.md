@@ -3,9 +3,11 @@ File created on: 26/01/2026
 - You need to run the script in project root for the imports to work.
 
 
-Last edit to the repo: 28/01/2026
+Last edit to the repo: 30/01/2026
+Changed the repository name from 'cochlear-models' to 'auditory-pRF-subcortical'
+
 Commits:
-https://github.com/iekimcelikay/cochlear-models/commits/main/
+https://github.com/iekimcelikay/auditory-pRF-subcortical/commits/main/
 
 ---
 ## IMPORTANT:
