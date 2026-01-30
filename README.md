@@ -6,7 +6,7 @@ File created on: 26/01/2026
 Last edit to the repo: 30/01/2026
 
 - Changed the repository name from 'cochlear-models' to 'auditory-pRF-subcortical'. If you have a local copy, run this command in the directory of the repo is located in
-    - `git remote set-url origin  https://github.com/iekimcelikay/auditory-pRF-subcortical` (source: {Github Docs: Creating and managing repositories}[https://docs.github.com/en/repositories/creating-and-managing-repositories/renaming-a-repository]
+    - `git remote set-url origin  https://github.com/iekimcelikay/auditory-pRF-subcortical` (source: [Github Docs: Creating and managing repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/renaming-a-repository)
 
 Commits:
 https://github.com/iekimcelikay/auditory-pRF-subcortical/commits/main/
