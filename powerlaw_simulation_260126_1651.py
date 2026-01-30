@@ -11,7 +11,7 @@
 # Created by: Ekim Celikay
 
 # 1. Apply power function
-# 2. Re-normalize (divide by pooled activity)
+# 2. Re-normalize
 
 # ==== POWER-LAW NONLINEARITY ====
 #   - Applying a power function sharpens tuning curves by:
@@ -24,6 +24,8 @@
 # Then you need to re-normalize:
 #
 # or sometimes:
+# DIVISIVE NORMALIZATION IS TO MIMIC LATERAL INHIBITION. SO FOR NOT IMPLEMENTED.
+
 # r_normalized = r_powered / (σ + (Σ_j w_ij * r_j^n)^(1/n))
 # Power function: Enhances strong responses, suppresses weak ones
 # Apply divisive normalization if you want to model lateral inhibition (28.01)
@@ -79,7 +81,7 @@ def apply_multiple_power_with_percf_normalization(response_matrix, exponents):
 
 def plot_single_cf_single_exponent(response_matrix, tone_freqs, cf_list, cf_idx, exponent, figsize=(10, 6)):
     """Plot tuning curve for a single CF with a single power exponent.
-
+     TODO: move plotting functions to their right place.
     Args:
         response_matrix: Original response matrix (num_cf, num_tones)
         tone_freqs: Array of tone frequencies
@@ -108,7 +110,7 @@ def plot_single_cf_single_exponent(response_matrix, tone_freqs, cf_list, cf_idx,
 
 def plot_single_cf_multiple_exponents(response_matrix, tone_freqs, cf_list, cf_idx, exponents, figsize=(10, 6), verbose=True):
     """Plot tuning curves for a single CF with multiple power exponents.
-
+     TODO: move plotting functions to their right place.
     Args:
         response_matrix: Original response matrix (num_cf, num_tones)
         tone_freqs: Array of tone frequencies
@@ -148,7 +150,7 @@ def plot_single_cf_multiple_exponents(response_matrix, tone_freqs, cf_list, cf_i
 
 def plot_all_cfs_multiple_exponents(response_matrix, tone_freqs, cf_list, exponents, n_cols=5, verbose=True):
     """Plot tuning curves for all CFs with multiple power exponents in a grid.
-
+     TODO: move plotting functions to their right place.
     Args:
         response_matrix: Original response matrix (num_cf, num_tones)
         tone_freqs: Array of tone frequencies
@@ -234,7 +236,7 @@ def plot_all_cfs_multiple_exponents(response_matrix, tone_freqs, cf_list, expone
 #    - Loop through axes and plot different data on each
 
 def calculate_Q10(frequencies, firing_rates, CF):
-    # TODO: WORK ON CALCULATING Q10 FACTOR.
+    # TODO: Move q-factor calcs to its own scripts maybe?
 
 
     # Find peak response
