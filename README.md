@@ -1,5 +1,6 @@
 # auditory-pRF-subcortical
-contact: e.celikay@bcbl.eu / i.ekimcelikay@gmail.com
+
+- contact: e.celikay@bcbl.eu / i.ekimcelikay@gmail.com
 -----
 #### Quick access:
 - [Commits-main](https://github.com/iekimcelikay/auditory-pRF-subcortical/commits/main/)
