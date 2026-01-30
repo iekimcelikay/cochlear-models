@@ -8,6 +8,11 @@ Commits:
 https://github.com/iekimcelikay/cochlear-models/commits/main/
 
 ---
+## IMPORTANT:
+- Use the cochlea package in this repo, its' Zilany2014 model codes are updated for Python 3.
+- To make thorns work in Python3, these changes might be needed:
+-> replace `import imp` with `import importlib as imp`
+-> replace `from collections` with `collections.abc
 
 ## Changelog
 
