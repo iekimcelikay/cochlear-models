@@ -181,14 +181,20 @@ class SoundGen:
         # Generate the sequence with ISI gaps between each tone
         sequence = np.array([])
 
-        for _ in range(num_tones):
+        for i in range(num_tones):
             sequence = np.concatenate((sequence, ramped_sound))
 
-            # Add ISI (silent gap) between tones
-            sequence = np.concatenate((sequence, np.zeros(isi_samples)))
+            # Add ISI (silent gap) between tones, but not after the last tone
+            if i < num_tones - 1:
+                sequence = np.concatenate((sequence, np.zeros(isi_samples)))
 
-        # Ensure the sequence doesn't exceed the total duration
-        if len(sequence) > total_samples:
+        # Pad or truncate to reach exactly total_duration
+        if len(sequence) < total_samples:
+            # Pad with zeros to reach exact duration
+            padding = np.zeros(total_samples - len(sequence))
+            sequence = np.concatenate((sequence, padding))
+        elif len(sequence) > total_samples:
+            # Truncate if somehow exceeded
             sequence = sequence[:total_samples]
 
         # If stereo is desired, duplicate the mono sequence into two channels
