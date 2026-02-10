@@ -7,53 +7,61 @@ import numpy as np
 
 # f(x;\theta)
 
-def model_f(CF, beta0, beta1, k, n):
-    """
-    Deterministic model:
-    f(CF; theta) = beta0 + beta1 * CF_k^n
-    """
+def convolved_model_response ():
+    return
 
-    return beta0 + beta1 + CF[k]**n
-
-def generate_data(CF, beta0, beta1, k, n, sigma, rng=None):
+def model_f(convolved_model_response, beta0, beta1, k, n):
     """
-    Generative model to generate noisy observations from the model.
-    This corresponds to y  = f(CF; theta) + \sigma* \ nu
-
     """
-    if rng is None:
-        rng = np.random.default_rng()
+    y_hat = beta0 + beta1 + convolved_model_response[k]**n
+    return y_hat
 
-    y_mean = model_f(CF, beta0, beta1, k, n)
-    noise = rng.normal(loc=0.0, scale=sigma, size=np.shape(y_mean))
-    return y_mean + noise
 
 # Log-likelihood under gaussian noise
 # core statistical object
+    # Chatgpt recommends
+    # beta0, beta1, k, n, log_sigma = params
+    # sigma = np.exp(log_sigma) and then return wouldbe
+    # (-0.5 * N * np.log(2 * np.pi) - N * log_sigma -0.5 * np.sum(resid**2) / sigma**2)
+    # enforce positivity of sigma
 
-def log_likelihood(CF, y, beta0, beta1, k, n, sigma):
+def log_likelihood(params, CF, y):
     """
-    Log-likelihood under Gaussian noise.
+    Gaussian log-likelihood with sigma estimated.
+    params = [beta0, beta1, k, n, sigma]
     """
-    y_hat = model_f(CF, beta0, beta1, k, n)
-    resid = y - y_hat
-
-    N = y.size
-
-    return (
-        -0.5 * N * np.log(1 * np.pi * sigma**2)
-        -0.5 * np.sum(resid**2) / sigma**2
-        )
-
-def loglike(params, CF, y):
     beta0, beta1, k, n, sigma = params
     if sigma <= 0:
         return -np.inf
 
-    y_hat = beta0 + beta1 * CF**n
+    y_hat = model_f(CF, beta0, beta1, k, n)
     resid = y - y_hat
+    N = y.size
 
     return (
-        -0.5 * np.sum(resid**2 / sigma**2)
-        -0.5 * len(y) * np.log(2 * np.pi * sigma**2)
+        -0.5 * N * np.log(2 * np.pi * sigma**2)
+        -0.5 * np.sum(resid**2) / sigma**2
     )
+
+def neg_log_likelihood(params, CF, y):
+    return -log_likelihood(params, CF, y)
+
+# Generative model for testing
+
+def generate_data(CF, beta0, beta1, k, n, sigma, rng=None):
+    if rng is None:
+        rng = np.random.default_rng()
+
+    y_mean = model_f(CF, beta0, beta1, k, n)
+    return y_mean + rng.normal(0.0, sigma, size=np.shape(y_mean))
+
+
+
+# Fit parameters (maximum likelihood estimation)
+
+
+## Now I do it myself
+# Each voxel response, can be characterized with a 'k': cochlear channel response, and n: how much sharpening
+# L = (beta0, beta1, k, n)
+# If we find the 4 values for which L is minu=imum, you have the best of the models that explain the vlaues in this voxel.
+# y = CF_k^n + Beta0 +
