@@ -301,7 +301,7 @@ class CochleaSimulation(_SimulationBase):
 # ================= CochleaWavSimulation
 
 
-class CochleaWavSimulation(_SimulationBase):
+class CochleaWavSimulationMean(_SimulationBase):
     """
     Docstring for CochleaWavSimulation
     """
@@ -420,7 +420,7 @@ class CochleaWavSimulation(_SimulationBase):
             metadata = self.metadata_dict.get(identifier, {})
 
             # Process using process_wavfile
-            result = self.processor.process_wavfile(audio, identifier, metadata)
+            result = self.processor.process_wav_meanrate(audio, identifier, metadata)
 
             # Calculate population rate
             population_rate = calculate_population_rate(result['mean_rates'])
