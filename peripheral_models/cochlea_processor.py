@@ -226,7 +226,7 @@ class CochleaProcessor:
                 logger.error(f"Failed procesing {freq:.1f}Hz @ {db}dB: {e}")
                 raise
 
-    def process_wavfile(self, sound: np.ndarray,
+    def process_wav_meanrate(self, sound: np.ndarray,
                      identifier: str = "sound",
                         metadata: dict = None):
         """
