@@ -8,7 +8,7 @@ Last edit: 11/02/2026
 
 10.02.2026
 - Implement z() till next week.
-[+] You need to modify the cochlea simulation pipeline to accept .wavs, but still get PSTH, not the mean-rates.
+- [+] You need to modify the cochlea simulation pipeline to accept .wavs, but still get PSTH, not the mean-rates.
 - You need to also implement running the simlaion i.e. 100 times with different seeds
 - another function to get the average of the 100 runs.
 - Look for dIPC things, you need the memory there.
