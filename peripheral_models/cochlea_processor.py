@@ -292,3 +292,59 @@ class CochleaProcessor:
             logger.error(f"Failed processing {identifier}: {e}")
             raise
 
+    def process_wav_psth(self, sound: np.ndarray,
+                         identifier: str = "sound",
+                         metadata: dict = None):
+        """
+        Process a WAV file through the zilany2014 full spike train model.
+        
+        Generates individual spike trains, aggregates them into PSTH, and calculates mean rates.
+        
+        Args:
+            sound: Audio stimulus array
+            identifier: Identifier for this sound
+            metadata: Optional metadata dict
+            
+        Returns:
+            dict: Results containing:
+                - mean_rates: Dict[fiber_type, array(num_cf)]
+                - psth: Dict[fiber_type, array(num_cf, n_bins)]
+                - cf_list: Array of CFs
+                - duration: Sound duration
+                - time_axis: Time axis for PSTH
+                - identifier: Sound identifier
+                - metadata: Any provided metadata
+        """
+        logger.info(f"Processing sound with PSTH: {identifier}")
+        
+        try:
+            # Run full spike train model (not rate model)
+            trains = self._run_cochlea_model(sound)
+            
+            # Convert to array format
+            spike_array, cf_list, duration = self._convert_to_array(trains)
+            
+            # Aggregate by fiber type (gets both mean rates and PSTH)
+            mean_rates, psth = self._aggregate_by_fiber_type(
+                trains, spike_array, cf_list, duration
+            )
+            
+            result = {
+                'soundfileid': identifier,
+                'mean_rates': mean_rates if self.config.save_mean_rates else None,
+                'psth': psth if self.config.save_psth else None,
+                'cf_list': cf_list,
+                'duration': duration,
+                'time_axis': self._time_axis
+            }
+            
+            # Include any provided metadata
+            if metadata:
+                result['metadata'] = metadata
+                
+            return result
+            
+        except Exception as e:
+            logger.error(f"Failed processing {identifier}: {e}")
+            raise
+
