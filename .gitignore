@@ -30,7 +30,7 @@ build/
 outputs/
 models_output/
 figures/
-stimulus/produced/
+stimuli/produced/
 *.npz
 *.mat
 *.pkl
