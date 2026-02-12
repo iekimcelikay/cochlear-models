@@ -12,3 +12,10 @@ Last edit: 11/02/2026
 - You need to also implement running the simlaion i.e. 100 times with different seeds
 - another function to get the average of the 100 runs.
 - Look for dIPC things, you need the memory there.
+
+12-02-26
+- The environment was corrupted so I created a new environment.  Now the scripts are working
+- Processing a 1 sec stimuli used around 6gb of memory
+- [ ] TODO: you need to setup the env and scripts in dIPC. So
+- [ ] TODO: To run the scripts in dIPC, you need to tidy up your codespace so you know what to run there from bash.
+- [ ] Refactor the powerlaw script because it will be in the pipeline.

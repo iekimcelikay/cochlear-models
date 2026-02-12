@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
+import numpy as np
 
 
 def hz_formatter(x, pos):
@@ -71,6 +72,66 @@ def plot_spectrogram_forCFS(cf_list, tone_freqs, response_matrix, db_level, save
 
     return fig, ax
 
+def plot_psth_timecourses(time_axis, population_psth, cf_list, identifier="", save_path=None):
+    """Plot PSTH time courses for all cochlear channels.
+
+    Args:
+        time_axis: Array of time points (seconds)
+        population_psth: 2D array of shape (num_cf, n_bins) - population response over time
+        cf_list: Array of CF values (Hz)
+        identifier: Optional identifier for the plot title
+        save_path: Optional path to save figure
+
+    Returns:
+        fig, axes: Matplotlib figure and axes array
+    """
+    num_cf = len(cf_list)
+
+    # Create subplot grid
+    n_cols = min(3, num_cf)
+    n_rows = int(np.ceil(num_cf / n_cols))
+
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(6*n_cols, 3*n_rows))
+
+    # Handle single subplot case
+    if num_cf == 1:
+        axes = np.array([axes])
+    axes = axes.flatten()
+
+    # Plot time course for each CF channel
+    for i_cf, cf in enumerate(cf_list):
+        ax = axes[i_cf]
+
+        # Get population response time course for this CF
+        timecourse = population_psth[i_cf, :]
+
+        # Plot time course
+        ax.plot(time_axis, timecourse, linewidth=1.5, color='steelblue')
+
+        # Labels and formatting
+        ax.set_xlabel('Time (s)', fontsize=10)
+        ax.set_ylabel('Firing Rate (sp/s)', fontsize=10)
+        ax.set_title(f'CF = {cf:.0f} Hz', fontsize=11, fontweight='bold')
+        ax.grid(True, alpha=0.3, linestyle='--', linewidth=0.5)
+        ax.tick_params(labelsize=9)
+
+    # Hide unused subplots
+    for i in range(num_cf, len(axes)):
+        axes[i].axis('off')
+
+    # Overall title
+    title = f'PSTH Time Courses - Population Response'
+    if identifier:
+        title += f' ({identifier})'
+    fig.suptitle(title, fontsize=14, fontweight='bold', y=0.995)
+
+    plt.tight_layout(rect=[0, 0, 1, 0.99])
+
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Figure saved to: {save_path}")
+
+    return fig, axes
 def plot_tuning_curves(cf_list, tone_freqs, response_matrix, db_level, save_path=None):
     """Plot tuning curves for each CF channel in subplots.
 
