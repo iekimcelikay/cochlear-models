@@ -1,6 +1,8 @@
 import sys
 from pathlib import Path
 
+# Add parent directory to path to import peripheral_models
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from peripheral_models.cochlea_config import CochleaConfig
 from peripheral_models.cochlea_simulation import CochleaWavSimulation
@@ -15,12 +17,12 @@ def main():
         peripheral_fs=100000,
         min_cf=125,
         max_cf=2500,
-        num_cf=40,
-        num_ANF=(128, 128, 128),
+        num_cf=3,
+        num_ANF=(2, 2, 2),
         powerlaw = 'approximate',
 
         # Output settings
-        output_dir = "./models_output/cochlea_wavfiles_001",
+        output_dir = "./models_output/cochlea_wavfiles_110226_01",
         experiment_name="jasmin",
         save_formats=['npz'],
         save_mean_rates=True,

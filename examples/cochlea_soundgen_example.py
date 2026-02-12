@@ -1,3 +1,8 @@
+import sys
+from pathlib import Path
+
+# Add parent directory to path to import peripheral_models
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from peripheral_models.cochlea_config import CochleaConfig
 from peripheral_models.cochlea_simulation import ToneConfig, CochleaSimulation
@@ -9,17 +14,17 @@ from peripheral_models.cochlea_simulation import ToneConfig, CochleaSimulation
 if __name__ == '__main__':
     # Model configuration (stimulus-agnostic)
     model_config = CochleaConfig(
-        num_cf=40,
-        num_ANF=(128,128,128),
+        num_cf=3,
+        num_ANF=(2,2,2),
         powerlaw= 'approximate',
-        output_dir="./models_output/cochlea_test015_approximate",
-        experiment_name="test015",    # Prefix for all output files
+        output_dir="./models_output/cochlea_test018_12feb_",
+        experiment_name="fixedenvironment_test018_meanrate",    # Prefix for all output files
 
         # Output format control
         save_formats=['npz'],         # Only save NPZ files
         metadata_format='txt',        # Save metadata as text
-        save_psth=False,               # Include PSTH arrays
-        save_mean_rates=True,         # Include mean rates
+        save_psth=True,               # Include PSTH arrays
+        save_mean_rates=False,         # Include mean rates
 
         # Logging configuration
         log_level='INFO',             # Overall log level (not used directly)
@@ -32,7 +37,7 @@ if __name__ == '__main__':
     # Tone stimulus configuration
     tone_config = ToneConfig(
         db_range=[60],
-        freq_range=(125, 2500, 40),
+        freq_range=(125, 2500, 3),
         tone_duration=0.200,
         num_harmonics=1,
         harmonic_factor=0.5,

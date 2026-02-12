@@ -1,12 +1,10 @@
-# This will be the functional script adapted from sound_generator.py
-# import cochlea
+
+# Created by: Ekim Celikay
 
 import numpy as np
 import thorns
 from scipy.signal import firwin, filtfilt
 
-# This script will define the functions,
-# and then another module script will call these functions.
 
 
 class SoundGen:
