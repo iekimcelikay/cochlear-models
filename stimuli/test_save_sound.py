@@ -24,7 +24,7 @@ def test_soundsequence_save(out_path):
     tone_duration=0.200
     harmonic_factor=1
     dbspl=60
-    total_duration=0.500
+    total_duration=1.0
     isi=0.100
 
     sequence = soundgen.generate_sequence(freq=fc, num_harmonics=num_harmonics, tone_duration=tone_duration,
