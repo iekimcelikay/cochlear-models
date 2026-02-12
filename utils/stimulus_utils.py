@@ -153,4 +153,24 @@ def generate_tone_generator(
             yield (db, freq, tone)
 
 
+def ensure_mono(audio):
+    """
+    Convert stereo audio to mono if needed.
+
+    Parameters
+    ----------
+    audio : ndarray
+        Audio array, either 1D (mono) or 2D (stereo/multichannel)
+
+    Returns
+    -------
+    ndarray
+        1D mono audio array
+    """
+    if audio.ndim == 2:
+        # Average across channels to convert to mono
+        audio = audio.mean(axis=1)
+        logger.info(f"Converted stereo/multichannel audio to mono by averaging channels")
+    return audio
+
 #----------------------------------------
