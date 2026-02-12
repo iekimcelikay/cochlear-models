@@ -23,8 +23,8 @@ if __name__ == '__main__':
         # Output format control
         save_formats=['npz'],         # Only save NPZ files
         metadata_format='txt',        # Save metadata as text
-        save_psth=False,               # Include PSTH arrays
-        save_mean_rates=True,         # Include mean rates
+        save_psth=True,               # Include PSTH arrays
+        save_mean_rates=False,         # Include mean rates
 
         # Logging configuration
         log_level='INFO',             # Overall log level (not used directly)
