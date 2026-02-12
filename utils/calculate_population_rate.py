@@ -5,26 +5,32 @@ import logging
 logger = logging.getLogger(__name__)
 
 def calculate_population_rate(
-        mean_rates: Dict[str, np.ndarray],
+        fiber_responses: Dict[str, np.ndarray],
         hsr_weight: float = 0.63,
         msr_weight: float = 0.25,
         lsr_weight: float = 0.12
         ) -> np.ndarray:
-    """Calculate weighted population rate across fiber types for each CF.
+    """Calculate weighted population rate across fiber types.
 
     Typical auditory nerve fiber proportions:
     - 63% High Spontaneous Rate (HSR)
     - 25% Medium Spontaneous Rate (MSR)
     - 12% Low Spontaneous Rate (LSR)
 
+    Works with both mean rates (1D) and PSTH data (2D) - output shape matches input shape.
+
     Args:
-        mean_rates: Dict[fiber_type, array(num_cf)] - mean rates per fiber type
+        fiber_responses: Dict[fiber_type, array] - responses per fiber type
+            - For mean rates: Dict[fiber_type, array(num_cf)]
+            - For PSTH: Dict[fiber_type, array(num_cf, n_bins)]
         hsr_weight: Weight for HSR fibers (default: 0.63)
         msr_weight: Weight for MSR fibers (default: 0.25)
         lsr_weight: Weight for LSR fibers (default: 0.12)
 
     Returns:
-        np.ndarray of shape (num_cf,) - weighted population rate per CF
+        np.ndarray - weighted population response (shape matches input arrays)
+            - For mean rates: shape (num_cf,)
+            - For PSTH: shape (num_cf, n_bins)
     """
     weights = {'hsr': hsr_weight, 'msr': msr_weight, 'lsr': lsr_weight}
 
@@ -35,12 +41,12 @@ def calculate_population_rate(
         weights = {k: v/weight_sum for k, v in weights.items()}
 
     # Calculate weighted sum
-    population_rate = np.zeros_like(mean_rates['hsr'])
+    population_rate = np.zeros_like(fiber_responses['hsr'])
 
     for fiber_type, weight in weights.items():
-        if fiber_type in mean_rates:
-            population_rate += weight * mean_rates[fiber_type]
+        if fiber_type in fiber_responses:
+            population_rate += weight * fiber_responses[fiber_type]
         else:
-            logger.warning(f"Missing {fiber_type} in mean_rates")
+            logger.warning(f"Missing {fiber_type} in fiber_responses")
 
     return population_rate

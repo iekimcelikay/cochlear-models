@@ -153,7 +153,7 @@ def generate_tone_generator(
             yield (db, freq, tone)
 
 
-def ensure_mono(audio):
+def ensure_mono(audio, logger):
     """
     Convert stereo audio to mono if needed.
 
