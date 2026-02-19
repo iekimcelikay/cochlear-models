@@ -38,12 +38,25 @@ class CochleaProcessor:
         self.config = config
         self._time_axis = None # Cache time axis
 
-        # Calculate cf_list then to pass to rate function
-        self._cf_list = calc_cfs(
-            cf=(self.config.min_cf, self.config.max_cf, self.config.num_cf),
-            species=self.config.species
-            )
-        logger.debug(f"CF list: {len(self._cf_list)} CFs from {self._cf_list[0]:.1f} to {self._cf_list[-1]:.1f} Hz")
+        # Calculate cf_list based on batch mode
+        if self.config.cf_batch_enabled and self.config.cf_batch_size is not None:
+            # Batch mode: only use CFs for current batch
+            self._cf_list = self.config.get_current_batch_cf_array()
+            batch_start, batch_end = self.config.get_batch_cf_range(self.config.cf_batch_current)
+            logger.info(
+                f"CF Batch mode: Processing batch {self.config.cf_batch_current} "
+                f"(CF indices {batch_start}-{batch_end}, {len(self._cf_list)} CFs: "
+                f"{self._cf_list[0]:.1f} - {self._cf_list[-1]:.1f} Hz)"
+                )
+
+        else:
+            # Standard mode: Use all CFs
+            # Calculate cf_list then to pass to rate function
+            self._cf_list = calc_cfs(
+                cf=(self.config.min_cf, self.config.max_cf, self.config.num_cf),
+                species=self.config.species
+                )
+            logger.debug(f"CF list: {len(self._cf_list)} CFs from {self._cf_list[0]:.1f} to {self._cf_list[-1]:.1f} Hz")
 
     # ============ Pipeline Step 1: Run Model ============
 
@@ -297,14 +310,14 @@ class CochleaProcessor:
                          metadata: dict = None):
         """
         Process a WAV file through the zilany2014 full spike train model.
-        
+
         Generates individual spike trains, aggregates them into PSTH, and calculates mean rates.
-        
+
         Args:
             sound: Audio stimulus array
             identifier: Identifier for this sound
             metadata: Optional metadata dict
-            
+
         Returns:
             dict: Results containing:
                 - mean_rates: Dict[fiber_type, array(num_cf)]
@@ -316,19 +329,19 @@ class CochleaProcessor:
                 - metadata: Any provided metadata
         """
         logger.info(f"Processing sound with PSTH: {identifier}")
-        
+
         try:
             # Run full spike train model (not rate model)
             trains = self._run_cochlea_model(sound)
-            
+
             # Convert to array format
             spike_array, cf_list, duration = self._convert_to_array(trains)
-            
+
             # Aggregate by fiber type (gets both mean rates and PSTH)
             mean_rates, psth = self._aggregate_by_fiber_type(
                 trains, spike_array, cf_list, duration
             )
-            
+
             result = {
                 'soundfileid': identifier,
                 'mean_rates': mean_rates if self.config.save_mean_rates else None,
@@ -337,13 +350,13 @@ class CochleaProcessor:
                 'duration': duration,
                 'time_axis': self._time_axis
             }
-            
+
             # Include any provided metadata
             if metadata:
                 result['metadata'] = metadata
-                
+
             return result
-            
+
         except Exception as e:
             logger.error(f"Failed processing {identifier}: {e}")
             raise
