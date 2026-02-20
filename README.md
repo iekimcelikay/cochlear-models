@@ -6,10 +6,9 @@
 - [Commits-main](https://github.com/iekimcelikay/auditory-pRF-subcortical/commits/main/)
 -----
 
-Last edit to the repo: 11/02/2026
-- Separated simulationclasses into different scripts
-- Added simulation class for wav files PSTH processing
-- Added documentation detailing the classes and usage
+Last edit to the repo: 20/02/2026
+
+https://github.com/iekimcelikay/cochlea.git install cochlea py3-zilany2014 from here. 
 
 ---
 ## IMPORTANT:
